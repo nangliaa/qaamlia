@@ -1,0 +1,22 @@
+#base ǐ|M; // insert/menu
+
+M: block; // blockerar Meny- och Insert-knapparna
+ǐ: block;
+
+⁵ (@base): reload; // laddar om ändringar gjorda i denna fil (f5)
+⁸ (@base): remap ẁ; // volume down (f8)
+⁹ (@base): remap ½WU; // volume up (f9)
+ᵃ (@base): remap ½PP; // pausa på/av musik (f10 (½FA))
+ť (@base): exit; // avslutar programmet (del)
+
+d (@base): paste %Y-%m-%d; // ÅÅÅÅ-MM-DD
+e (@base): paste %D; // namnet på enheten du använder
+f (@base): paste %a %d %b %Y %H:%M:%S, vecka %V; // Vkd DD Mån ÅÅÅÅ HH:MM:SS, vecka XX
+m (@base): music (-ins acc -osc sin); // dragspel med sinusvågor
+p (@base): run notepad %pqåmlia.qlia; // Öppnar denna fil i Anteckningar
+t (@base): paste %H:%M:%S; // HH:MM:SS
+w (@base): paste %A vecka %V; // Xdag vecka XX
+x (@base): paste %x; // programmet du kör nu:s fil
+å (@base): window %a %d %b %Y %H:%M:%S, vecka %V; // fönster med tiden
+ä (@base): window Koskräööe;
+ö (@base): paste %w; // fönstrets namn
