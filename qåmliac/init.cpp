@@ -1,17 +1,17 @@
 /* =============================================================================================
-	Qåmlia - a program for doing stuff usiŋ only normal keypresses from anywhere.
-	Copyright (C) 2025 Johannah Granström
+	Qåmlia - a program for doiŋ þiŋs usiŋ only normal keypresses from anywhere.
+	Copyright © 2025 Johannah Granström
 
-	This program is free software: you can redistribute it and/or modify it under
-	the terms of the GNU General Public License as published by the Free Software Foundation,
-	either version 3 of the License, or (at your option) any later version.
+	Ðis program is free software: you can redistribute it and/or modify it under
+	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
+	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-	See the GNU General Public License for more details.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
+	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	See ðe GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program. If not, see <https://www.gnu.org/licenses/>.
+	You should have received a copy of ðe GNU General Public License
+	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
@@ -48,8 +48,8 @@ void enterInit () {
 			{ { L'B', (L'B' << BYTESHIFT1) | L'S' }, VBS }, // 08
 			{ { L'T', (L'T' << BYTESHIFT1) | L'A' }, VTAB }, // 09
 			{ { L'Č', (L'N' << BYTESHIFT1) | L'C' }, VNUMCLEAR }, // 0C
-			{ { L'ř', (L'R' << BYTESHIFT1) | L'N' }, VRETURN }, // 0D
-			{ { L'Ř', (L'E' << BYTESHIFT1) | L'T' }, VENTER }, // 10D NUM RETURN~
+			{ { L'ž', (L'R' << BYTESHIFT1) | L'N' }, VRETURN }, // 0D
+			{ { L'Ž', (L'E' << BYTESHIFT1) | L'T' }, VENTER }, // 10D NUM RETURN~
 			{ { L'š', (L'S' << BYTESHIFT1) | L'H' }, VSHIFT }, // 10
 			{ { L'č', (L'C' << BYTESHIFT1) | L'T' }, VCTRL }, // 11
 			{ { L'ǎ', (L'A' << BYTESHIFT1) | L'L' }, VALT }, // 12
@@ -281,7 +281,7 @@ void enterInit () {
 			{ { L'F', (L'V' << BYTESHIFT1) | L'F' }, VFF }, // FF DO NOT USE
 			};
 
-	for (auto s : keys) {
+	for (std::pair<std::pair<wc, wc> const, us> const &s : keys) {
 		ckeys.insert(std::pair<wc, us>(s.first.first, s.second));
 		skeys.insert(std::pair<wc, us>(s.first.second, s.second));
 	}
@@ -299,7 +299,7 @@ us chari (wc a, wc b) {
 	if (skeys.find(cc) != skeys.end()) {
 		return (skeys.at(cc));
 	}
-	printf("Fail TO FIND %lc", cc);
+	printf("Fail TO FIND %lc, %d", cc, cc);
 	return (0);
 }
 
@@ -307,7 +307,7 @@ us chari (wc cc) {
 	if (ckeys.find(cc) != ckeys.end()) {
 		return (ckeys.at(cc));
 	}
-	printf("Fail TO FIND %lc", cc);
+	printf("Fail TO FIND %lc, %d", cc, cc);
 	return (0);
 }
 

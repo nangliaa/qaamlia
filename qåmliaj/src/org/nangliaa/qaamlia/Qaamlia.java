@@ -1,17 +1,17 @@
 /* =============================================================================================
-	Qåmlia - a program for doing stuff usiŋ only normal keypresses from anywhere.
-	Copyright (C) 2025 Johannah Granström
+	Qåmlia - a program for doiŋ þiŋs usiŋ only normal keypresses from anywhere.
+	Copyright © 2025 Johannah Granström
 
-	This program is free software: you can redistribute it and/or modify it under
-	the terms of the GNU General Public License as published by the Free Software Foundation,
-	either version 3 of the License, or (at your option) any later version.
+	Ðis program is free software: you can redistribute it and/or modify it under
+	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
+	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-	See the GNU General Public License for more details.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
+	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	See ðe GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program. If not, see <https://www.gnu.org/licenses/>.
+	You should have received a copy of ðe GNU General Public License
+	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 package org.nangliaa.qaamlia;
@@ -22,13 +22,14 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+import org.nangliaa.desktop.Special;
+
 /**
  * Main class connectiŋ to native C/C++ code.m
  */
 public class Qaamlia {
 	private static final long serialVersionUID = 1L;
 	private static View view;
-	private static String os = System.getProperty("os.name").toLowerCase();
 
 	static {
 		System.loadLibrary("hookDLL");
@@ -37,17 +38,8 @@ public class Qaamlia {
 		System.loadLibrary("libqåmliac");
 	}
 
-	private static String getAppDataPaþ () {
-		if (os.contains("win")) {
-			String appData = System.getenv("APPDATA");
-			return appData + "\\Naŋliå\\qåmlia";
-		}
-		if (os.contains("mac")) return System.getProperty("user.home") + "/Library/Application Support/Naŋliå/qåmlia";
-		return System.getProperty("user.home") + "/.local/share/Naŋliå/qåmlia";
-	}
-
 	private static String initFilesys () {
-		File folder = new File(getAppDataPaþ());
+		File folder = new File(Special.getAppDataPaþ()+File.separatorChar+"qåmlia");
 		System.err.println(folder);
 		if (!folder.exists()) folder.mkdirs();
 

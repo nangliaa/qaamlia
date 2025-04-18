@@ -1,17 +1,17 @@
 /* =============================================================================================
-	Qåmlia - a program for doing stuff usiŋ only normal keypresses from anywhere.
-	Copyright (C) 2025 Johannah Granström
+	Qåmlia - a program for doiŋ þiŋs usiŋ only normal keypresses from anywhere.
+	Copyright © 2025 Johannah Granström
 
-	This program is free software: you can redistribute it and/or modify it under
-	the terms of the GNU General Public License as published by the Free Software Foundation,
-	either version 3 of the License, or (at your option) any later version.
+	Ðis program is free software: you can redistribute it and/or modify it under
+	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
+	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-	See the GNU General Public License for more details.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
+	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	See ðe GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program. If not, see <https://www.gnu.org/licenses/>.
+	You should have received a copy of ðe GNU General Public License
+	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
@@ -68,8 +68,6 @@ struct SHash {
 };
 
 constexpr const ch *nullDevice = "췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍췍﷽﷽";
-constexpr const ch *myDevice = "\\\\?\\ACPI#HPQ8002#4&73889ac&0#{884b96c3-56ef-11d1-bc8c-00a0c91405dd}";
-constexpr const ch *keyBoard = "\\\\?\\HID#VID_1A2C&PID_212A&MI_00#8&7799bf8&0&0000#{884b96c3-56ef-11d1-bc8c-00a0c91405dd}";
 constexpr const ch *anyKB = "";
 
 constexpr us BIN = 2;
@@ -106,7 +104,7 @@ constexpr ul CROBOT = 0x8; //robot (not implemented)
 constexpr ul CLIA = 0x9; //lia (built-in programs)
 constexpr ul CRELOAD = 0xa; //reload script
 constexpr ul CMUSIC = 0xb; //reload script
-constexpr ul CREMAP = 0xfd; //remap key
+constexpr ul CREMAP = 0xc; //remap key
 constexpr ul CLLCTRLBLOCK = 0xfe; //CTRL LL BLOCK
 constexpr ul CLLBLOCK = 0xff; //LL BLOCK
 

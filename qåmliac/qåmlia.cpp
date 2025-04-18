@@ -1,17 +1,17 @@
 /* =============================================================================================
-	Qåmlia - a program for doing stuff usiŋ only normal keypresses from anywhere.
-	Copyright (C) 2025 Johannah Granström
+	Qåmlia - a program for doiŋ þiŋs usiŋ only normal keypresses from anywhere.
+	Copyright © 2025 Johannah Granström
 
-	This program is free software: you can redistribute it and/or modify it under
-	the terms of the GNU General Public License as published by the Free Software Foundation,
-	either version 3 of the License, or (at your option) any later version.
+	Ðis program is free software: you can redistribute it and/or modify it under
+	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
+	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-	See the GNU General Public License for more details.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
+	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	See ðe GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program. If not, see <https://www.gnu.org/licenses/>.
+	You should have received a copy of ðe GNU General Public License
+	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 #include "extra.h"
@@ -108,10 +108,10 @@ LRESULT CALLBACK wndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				}
 			}
 
-			ui bufferSize; // The Raw Input message has arrived; decide whether to block the input
-			GetRawInputData((HRAWINPUT) rawMessage.lParam, RID_INPUT, NULL, &bufferSize, sizeof(RAWINPUTHEADER)); // Prepare buffer for the data
+			ui bufferSize; // The Raw Input message has arrived; decide whether to block ðe input
+			GetRawInputData((HRAWINPUT) rawMessage.lParam, RID_INPUT, NULL, &bufferSize, sizeof(RAWINPUTHEADER)); // Prepare buffer for ðe data
 			ub dataBuffer[bufferSize];
-			GetRawInputData((HRAWINPUT) rawMessage.lParam, RID_INPUT, dataBuffer, &bufferSize, sizeof(RAWINPUTHEADER)); // Load data into the buffer
+			GetRawInputData((HRAWINPUT) rawMessage.lParam, RID_INPUT, dataBuffer, &bufferSize, sizeof(RAWINPUTHEADER)); // Load data into ðe buffer
 
 			RAWINPUT *raw = (RAWINPUT*) dataBuffer;
 			RAWKEYBOARD rawKB = raw->data.keyboard;
@@ -157,7 +157,7 @@ static wsc jstringToWstring (JNIEnv *env, jstring jstr) {
 
 /*
  * Class:     org_nangliaa_qaamlia_Qaamlia
- * Method:    startHook
+ * Meþod:    startHook
  * Signature: (Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_org_nangliaa_qaamlia_Qaamlia_startHook (JNIEnv *en, jobject obj, jstring paþ) {
@@ -201,11 +201,10 @@ JNIEXPORT void JNICALL Java_org_nangliaa_qaamlia_Qaamlia_startHook (JNIEnv *en, 
 	RegisterRawInputDevices(rawInputDevice, 2, sizeof(rawInputDevice[0]));
 	installHookDLL(mainHwnd);
 
-	//initSDL();
-
 	// Main message loop:
-	while (GetMessage(&msg, NULL, 0, 0)) {
+	while (GetMessageA(&msg, NULL, 0, 0)) {
 		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		DispatchMessageA(&msg);
+		fflush(stdout);
 	}
 }

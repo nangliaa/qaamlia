@@ -1,17 +1,17 @@
 /* =============================================================================================
-	Qåmlia - a program for doing stuff usiŋ only normal keypresses from anywhere.
-	Copyright (C) 2025 Johannah Granström
+	Qåmlia - a program for doiŋ þiŋs usiŋ only normal keypresses from anywhere.
+	Copyright © 2025 Johannah Granström
 
-	This program is free software: you can redistribute it and/or modify it under
-	the terms of the GNU General Public License as published by the Free Software Foundation,
-	either version 3 of the License, or (at your option) any later version.
+	Ðis program is free software: you can redistribute it and/or modify it under
+	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
+	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-	See the GNU General Public License for more details.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
+	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	See ðe GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program. If not, see <https://www.gnu.org/licenses/>.
+	You should have received a copy of ðe GNU General Public License
+	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
@@ -78,11 +78,13 @@ struct retur {
 	bool breaka;
 	ws arg;
 	ul command;
+	bool rel;
 
-	retur (bool br, wcr ar, ul com) {
+	retur (bool br, wcr ar, ul com, bool rl) {
 		breaka = br;
 		arg = ar;
 		command = com;
+		rel = rl;
 	}
 };
 
@@ -220,10 +222,6 @@ void initFile (wcr lpaþ) {
 					deviceName = L"";
 					exeName = L"";
 					windowName = L"";
-				} else if (cmd == (CREMAP << COMMANDSHIFT)) { //remap
-					if (args[1].length() == 1) remaps.insert( { press, chari(args[1][0]) });
-					else if (args[1].length() == 3) remaps.insert( { press, chari(args[1][2], args[1][1]) });
-					else printf("ERROR REMAP ONLY WORKS FOR 1 KEY");
 				} else if (cmd == (CLLCTRLBLOCK << COMMANDSHIFT)) { //ctrlblock
 					ctrlBlockList.insert(press);
 					blockList.insert(press);
@@ -401,33 +399,33 @@ static bool checkCarg (carga const &ca, ub a, std::string compare) {
 }
 
 /// downs don't matter keyboard right now.
-static bool checkCom (std::pair<std::pair<ul, carga>, ws> const &com, cca dev, bool ll) {
-	if (ll && (com.first.second[0].length() != 0 || com.second.find(L"%D") != com.second.npos)) return (false); // save for raw hook if triggered or telliŋ
-	if (!isdown((com.first.first >> 10) & KEYMASK, anyKB)) return (false);
-	if (!isdown((com.first.first >> 20) & KEYMASK, anyKB)) return (false);
-	if (!isdown((com.first.first >> 30) & KEYMASK, anyKB)) return (false);
-	if (!isdown((com.first.first >> 40) & KEYMASK, anyKB)) return (false);
+static bool checkCom (std::pair<std::pair<ul, carga> const, ws> const &com, cca dev, bool ll, bool rel) {
+	if ((rel && (com.first.first >> COMMANDSHIFT) != CREMAP) || (ll && (com.first.second[0].length() != 0 || com.second.find(L"%D") != com.second.npos))) return (false); // save for raw hook if triggered or telliŋ
+	if (!isdown((com.first.first >> DOWNESHIFT1) & KEYMASK, anyKB)) return (false);
+	if (!isdown((com.first.first >> DOWNESHIFT2) & KEYMASK, anyKB)) return (false);
+	if (!isdown((com.first.first >> DOWNESHIFT3) & KEYMASK, anyKB)) return (false);
+	if (!isdown((com.first.first >> DOWNESHIFT4) & KEYMASK, anyKB)) return (false);
 	if (!ll && com.first.second[0].length() != 0 && !checkCarg(com.first.second, 0, dev)) return (false);
 	if (com.first.second[1].length() != 0 && !checkCarg(com.first.second, 1, watst(activeWindowNameW().c_str()))) return (false);
 	if (com.first.second[2].length() != 0 && !checkCarg(com.first.second, 2, watst(activeProcessNameW().c_str()))) return (false);
 	return (true);
 }
 
-static retur getMouseAction (us key, int mx, int my, char const *dev, bool ll) {
+static retur getMouseAction (us key, int mx, int my, cca dev, bool ll) {
 	if (ll) {
-		for (const auto &pair : msa) {
-			if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll)) {
-				return (retur(true, pair.second, pair.first.first));
+		for (std::pair<std::pair<ul, carga> const, ws> const &pair : msa) {
+			if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, false)) {
+				return (retur(true, pair.second, pair.first.first, false));
 			}
 		}
 	} else {
-		for (const auto &pair : msa) {
-			if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll)) {
-				return (retur(true, pair.second, pair.first.first));
+		for (std::pair<std::pair<ul, carga> const, ws> const &pair : msa) {
+			if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, false)) {
+				return (retur(true, pair.second, pair.first.first, false));
 			}
 		}
 	}
-	return (retur(false, EMPTY_STRING, 0));
+	return (retur(false, EMPTY_STRING, 0, false));
 }
 
 //static vo clearIfUnpressed (ul time) {
@@ -452,54 +450,49 @@ static retur getKeyAction (us key, bool released, char const *dev, bool ll) {
 //	lastTimePressed = time + DOWNWAITMS;
 
 	if (ll) {
-		if (checkAllowQueue(key)) return (retur(false, EMPTY_STRING, 0));
+		if (checkAllowQueue(key)) return (retur(false, EMPTY_STRING, 0, false));
 		if (!released) {
 			llAlreadyDown = isdown(key, anyKB);
 			downAny.insert(key);
 			//downLL.insert(key);
 
-			for (const auto &pair : msa) {
-				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll)) return (retur(true, pair.second, pair.first.first));
+			for (std::pair<std::pair<ul, carga> const, ws> const &pair : msa) {
+				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, false)) return (retur(true, pair.second, pair.first.first, false));
 			}
-			if (remaps.find(key) != remaps.end()) return (retur(true, EMPTY_STRING, (CREMAP << COMMANDSHIFT) | remaps.at(key))); // TODO RAW
 
-			return (retur(isBlocked(key), EMPTY_STRING, 0));
+			return (retur(isBlocked(key), EMPTY_STRING, 0, false));
 		} else {
 			downAny.erase(key);
 			//downLL.erase(key);
-			if (remaps.find(key) != remaps.end()) return (retur(true, EMPTY_STRING, (CREMAP << COMMANDSHIFT) | (static_cast<ul>(1) << (COMMANDSHIFT - 1)) | remaps.at(key)));
-			return (retur(isBlocked(key), EMPTY_STRING, 0));
+
+			for (std::pair<std::pair<ul, carga> const, ws> const &pair : msa) {
+				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, true)) return (retur(true, pair.second, pair.first.first, true));
+			}
+
+			return (retur(isBlocked(key), EMPTY_STRING, 0, true));
 		}
 	} else {
 		if (checkAllowQueue(key)) {
 			popAllowQueue();
-			return (retur(false, EMPTY_STRING, 0));
+			return (retur(false, EMPTY_STRING, 0, false));
 		}
 		if (!released) {
 			down.insert( { key, dev });
-			if (playing) return (retur(playOnDev(dev, key, llAlreadyDown, true), EMPTY_STRING, 0));
+			if (playing) return (retur(playOnDev(dev, key, llAlreadyDown, true), EMPTY_STRING, 0, false));
 
 			for (const auto &pair : msa) {
-				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll)) return (retur(true, pair.second, pair.first.first));
-			}
-
-			if (strcmp(nullDevice, dev) != 0) { //artificials are not blocked
-				for (us a : ctrlBlockList) {
-					if (isdown(a, anyKB)) return (retur(true, EMPTY_STRING, 0));
-				}
+				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, false)) return (retur(true, pair.second, pair.first.first, false));
 			}
 		} else {
 			down.erase( { key, dev });
-			if (playing) return (retur(playOnDev(dev, key, llAlreadyDown, false), EMPTY_STRING, 0));
+			if (playing) return (retur(playOnDev(dev, key, llAlreadyDown, false), EMPTY_STRING, 0, true));
 
-			if (strcmp(nullDevice, dev) != 0) { //artificials are not blocked
-				for (us a : ctrlBlockList) {
-					if (isdown(a, anyKB)) return (retur(true, EMPTY_STRING, 0));
-				}
+			for (const auto &pair : msa) {
+				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, true)) return (retur(true, pair.second, pair.first.first, true));
 			}
 		}
 	}
-	return (retur(false, EMPTY_STRING, 0));
+	return (retur(false, EMPTY_STRING, 0, false));
 }
 
 static void calculate () {
@@ -545,8 +538,8 @@ static void exit () {
 static bool execute (us vk, retur breaka, bool ll, cca dev) {
 	if (!ll) bufPush(vk, breaka.breaka);
 	if (breaka.command != 0) {
-		ul oðer = breaka.command;
 		breaka.command >>= COMMANDSHIFT;
+		if (breaka.command != CREMAP && breaka.rel) return (breaka.breaka);
 		switch (breaka.command) {
 		case CRUN:
 			run(formatString(breaka.arg, dev));
@@ -573,8 +566,13 @@ static bool execute (us vk, retur breaka, bool ll, cca dev) {
 			javaVoidStringCall("robot", breaka.arg);
 			break;
 		case CREMAP:
-			if (oðer & (1ULL << (COMMANDSHIFT - 1))) release(oðer & KEYMASK);
-			else press(oðer & KEYMASK);
+			if (breaka.arg[0] == L'½') {
+				if (breaka.rel) release(chari(breaka.arg[2], breaka.arg[1])); // bc chari beiŋ opposite order
+				else press(chari(breaka.arg[2], breaka.arg[1]));
+			} else {
+				if (breaka.rel) release(chari(breaka.arg[0]));
+				else press(chari(breaka.arg[0]));
+			}
 			break;
 		case CRELOAD:
 			clearContainers(false);
@@ -594,7 +592,7 @@ static bool execute (us vk, retur breaka, bool ll, cca dev) {
 }
 
 sb function (us vk, int flag, int make, cca deviceName) {
-	retur breaka = retur(false, L"", 0x0);
+	retur breaka = retur(false, L"", 0x0, false);
 	bool released = flag & RI_KEY_BREAK;
 	switch (vk) {
 	case VSHIFT:
@@ -647,7 +645,7 @@ sb function (us vk, int flag, int make, cca deviceName) {
 }
 
 bool mouseFunction (ul vk, sl mx, sl my, cca deviceName) {
-	retur breaka = retur(false, L"", 0x0);
+	retur breaka = retur(false, L"", 0x0, false);
 
 	switch (vk) {
 	case RI_MOUSE_LEFT_BUTTON_DOWN:
@@ -693,7 +691,7 @@ bool mouseFunction (ul vk, sl mx, sl my, cca deviceName) {
 }
 
 bool functionLL (us vk, int flag) {
-	retur breaka = retur(false, EMPTY_STRING, 0x0);
+	retur breaka = retur(false, EMPTY_STRING, 0x0, false);
 	bool released = flag & 0x80;
 	switch (vk) {
 	case VCTRLNUMLOCK: //OPPOSITE HL HOOK

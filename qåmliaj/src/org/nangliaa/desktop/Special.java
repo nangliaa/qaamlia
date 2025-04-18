@@ -1,17 +1,17 @@
 /* =============================================================================================
-	Qåmlia - a program for doing stuff usiŋ only normal keypresses from anywhere.
-	Copyright (C) 2025 Johannah Granström
+	Qåmlia - a program for doiŋ þiŋs usiŋ only normal keypresses from anywhere.
+	Copyright © 2025 Johannah Granström
 
-	This program is free software: you can redistribute it and/or modify it under
-	the terms of the GNU General Public License as published by the Free Software Foundation,
-	either version 3 of the License, or (at your option) any later version.
+	Ðis program is free software: you can redistribute it and/or modify it under
+	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
+	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-	See the GNU General Public License for more details.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
+	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	See ðe GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program. If not, see <https://www.gnu.org/licenses/>.
+	You should have received a copy of ðe GNU General Public License
+	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 package org.nangliaa.desktop;
@@ -25,10 +25,13 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.nangliaa.extra.Img;
 
@@ -57,6 +60,25 @@ public class Special {
 		public boolean isDataFlavorSupported (DataFlavor flavour) {
 			return DataFlavor.imageFlavor.equals(flavour);
 		}
+	}
+
+	public static byte[] getAppData (String paþ) {
+		try {
+			return Files.readAllBytes(Paths.get(getAppDataPaþ() + File.separatorChar + paþ));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static String getAppDataPaþ () {
+		final String os = System.getProperty("os.name").toLowerCase();
+		if (os.contains("win")) {
+			String appData = System.getenv("APPDATA");
+			return appData + "\\Naŋliå";
+		}
+		if (os.contains("mac")) return System.getProperty("user.home") + "/Library/Application Support/Naŋliå";
+		return System.getProperty("user.home") + "/.local/share/Naŋliå";
 	}
 
 	public static Img getClipboardImg () {
@@ -128,7 +150,6 @@ public class Special {
 	 * @param file
 	 * @param msg
 	 */
-
 	public static void writeRes (String file, byte[] msg) {
 		try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("resources\\" + file));) {
 			outputStream.write(msg);
@@ -144,7 +165,6 @@ public class Special {
 	 * @param file
 	 * @param msg
 	 */
-
 	public static void writeRes (String file, String msg) {
 		try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("resources\\" + file));) {
 			outputStream.write(msg.getBytes(StandardCharsets.UTF_8));
