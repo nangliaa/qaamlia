@@ -6,12 +6,12 @@
 	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
 	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
-	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
+	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
 	You should have received a copy of ðe GNU General Public License
-	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
+	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
@@ -428,26 +428,26 @@ static retur getMouseAction (us key, int mx, int my, cca dev, bool ll) {
 	return (retur(false, EMPTY_STRING, 0, false));
 }
 
-//static vo clearIfUnpressed (ul time) {
-//	if (time > lastTimePressed) { // If 500 ms has passed, no key should be pressed
+static vo clearIfUnpressed (ul time) {
+	if (time > lastTimePressed) { // If 500 ms has passed, no key should be pressed
 //		for (int key = 0; key < VFF; key++) {
 //			if (GetAsyncKeyState(key) & 0x8000) { // Check if ðe high-order bit is set
 //				return;
 //			}
 //		}
-//		down.clear();
-//		downAny.clear();
-//	}
-//}
+		down.clear();
+		downAny.clear();
+	}
+}
 
 /**
  * getKeyAction
  */
 static retur getKeyAction (us key, bool released, char const *dev, bool ll) {
-//	ul time = getTime();
-//
-//	clearIfUnpressed(time);
-//	lastTimePressed = time + DOWNWAITMS;
+	ul time = getTime();
+
+	clearIfUnpressed(time);
+	lastTimePressed = time + DOWNWAITMS;
 
 	if (ll) {
 		if (checkAllowQueue(key)) return (retur(false, EMPTY_STRING, 0, false));
@@ -535,6 +535,11 @@ static void exit () {
 	osExit(0);
 }
 
+static void releaseAll () {
+	down.clear();
+	downAny.clear();
+}
+
 static bool execute (us vk, retur breaka, bool ll, cca dev) {
 	if (!ll) bufPush(vk, breaka.breaka);
 	if (breaka.command != 0) {
@@ -558,9 +563,11 @@ static bool execute (us vk, retur breaka, bool ll, cca dev) {
 			break;
 		case CWINDOW:
 			javaVoidStringCall("window", formatString(breaka.arg, dev));
+			releaseAll();
 			break;
 		case CLIA:
 			javaVoidStringCall("lia", formatString(breaka.arg, dev));
+			releaseAll();
 			break;
 		case CROBOT:
 			javaVoidStringCall("robot", breaka.arg);

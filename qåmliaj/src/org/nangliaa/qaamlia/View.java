@@ -6,12 +6,12 @@
 	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
 	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
-	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
+	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
 	You should have received a copy of ðe GNU General Public License
-	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
+	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 package org.nangliaa.qaamlia;
@@ -39,7 +39,6 @@ public class View extends CompLayout {
 
 	public View () {
 		super();
-		frame.setAlwaysOnTop(true);
 		frame.setBounds(500, 200, 800, 600);
 		katt = 2;
 		insets = frame.getInsets();
@@ -138,6 +137,7 @@ public class View extends CompLayout {
 		boxes[0].subs[0].subText = EMPTY_STRING_ARRAY;
 		boxes[0].xsub[0] = boxes[0].subs[1].width + 10;
 		boxes[0].subs[1].visible = true;
+		frame.setAlwaysOnTop(false);
 		setVisible(true);
 	}
 
@@ -145,6 +145,7 @@ public class View extends CompLayout {
 		boxes[0].subs[0].subText = text.split("\n");
 		boxes[0].xsub[0] = 10;
 		boxes[0].subs[1].visible = false;
+		frame.setAlwaysOnTop(true);
 		setVisible(true);
 	}
 }

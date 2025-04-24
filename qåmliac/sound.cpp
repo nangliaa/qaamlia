@@ -6,12 +6,12 @@
 	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
 	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
-	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
+	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
 	You should have received a copy of ðe GNU General Public License
-	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
+	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
@@ -187,6 +187,116 @@ static ub freqToTone (df freq) {
 }
 
 AudioData audioData;
+
+ui getPianoTone (us key) {
+	switch (key) {
+	case V1:
+		return (GS3);
+	case V2:
+		return (AS3);
+	case V4:
+		return (CS4);
+	case V5:
+		return (DS4);
+	case V7:
+		return (FS4);
+	case V8:
+		return (GS4);
+	case V9:
+		return (AS4);
+	case VPLUS:
+		return (CS5);
+	case VACUTE:
+		return (DS5);
+	case VTAB:
+		return (G3);
+	case VQ:
+		return (A3);
+	case VW:
+		return (B3);
+	case VE:
+		return (C4);
+	case VR:
+		return (D4);
+	case VT:
+		return (E4);
+	case VY:
+		return (F4);
+	case VU:
+		return (G4);
+	case VI:
+		return (A4);
+	case VO:
+		return (B4);
+	case VP:
+		return (C5);
+	case VÅ:
+		return (D5);
+	case VDIERESIS:
+		return (E5);
+//	case VRETURN:
+//		return (F5);
+//
+//	case VCAPS:
+//		return (E2);
+//	case VA:
+//		return (G2);
+//	case VS:
+//		return (AS2);
+//	case VD:
+//		return (CS3);
+//	case VF:
+//		return (E3);
+//	case VG:
+//		return (G3);
+//	case VH:
+//		return (AS3);
+//	case VJ:
+//		return (CS4);
+//	case VK:
+//		return (E4);
+//	case VL:
+//		return (G4);
+//	case VÖ:
+//		return (AS4);
+//	case VÄ:
+//		return (CS5);
+//	case VAPOSTROPHE:
+//		return (E5);
+//	case VPGDN:
+//		return (G5);
+//
+//		//case VLSHIFT: return (A4);
+//	case VLESSER:
+//		return (FS2);
+//	case VZ:
+//		return (A2);
+//	case VX:
+//		return (C3);
+//	case VC:
+//		return (DS3);
+//	case VV:
+//		return (FS3);
+//	case VB:
+//		return (A3);
+//	case VN:
+//		return (C4);
+//	case VM:
+//		return (DS4);
+//	case VCOMMA:
+//		return (FS4);
+//	case VPERIOD:
+//		return (A4);
+//	case VMINUS:
+//		return (C5);
+//	case VRSHIFT:
+//		return (DS5);
+//	case VEND:
+//		return (FS5);
+	default:
+		return (0);
+	}
+}
 
 ui getKeyTone (us key) {
 	switch (key) {
@@ -488,33 +598,33 @@ static vo audioCallback (vo *userData, ub *stream, si len) {
 	}
 
 	for (ui wave = 0; wave < OSC_NO; wave++) {
-	for (ui t = 0; t < MAX_TONES; t++) {
-		if (!audioData->tones[wave][t].active) continue;
+		for (ui t = 0; t < MAX_TONES; t++) {
+			if (!audioData->tones[wave][t].active) continue;
 
-		Tone *tone = &audioData->tones[wave][t];
-		for (ui i = 0; i < samples; i++) {
-			us ton = freqToTone(tone->frequency);
-			fl fade = ton > 70 ? 0.001f : ton > 60 ? 0.0005f : ton > 50 ? 0.0002f : ton > 40 ? 0.00005f : 0.00002f;		// : 0.0005f;
-			if (tone->amplitude < tone->targetAmplitude) {
-				tone->amplitude += fade;
-				if (tone->amplitude > tone->targetAmplitude) {
-					tone->amplitude = tone->targetAmplitude;
-				}
-			} else if (tone->amplitude > tone->targetAmplitude) {
-				tone->amplitude -= fade;
+			Tone *tone = &audioData->tones[wave][t];
+			for (ui i = 0; i < samples; i++) {
+				us ton = freqToTone(tone->frequency);
+				fl fade = ton > 70 ? 0.001f : ton > 60 ? 0.0005f : ton > 50 ? 0.0002f : ton > 40 ? 0.00005f : 0.00002f;		// : 0.0005f;
 				if (tone->amplitude < tone->targetAmplitude) {
-					tone->active = false;
+					tone->amplitude += fade;
+					if (tone->amplitude > tone->targetAmplitude) {
+						tone->amplitude = tone->targetAmplitude;
+					}
+				} else if (tone->amplitude > tone->targetAmplitude) {
+					tone->amplitude -= fade;
+					if (tone->amplitude < tone->targetAmplitude) {
+						tone->active = false;
+					}
 				}
-			}
 
-			output[i] += tone->amplitude * static_cast<fl>(getWave(wave, tone->phase));
-			tone->phase += tone->frequency / SAMPLE_RATE;
+				output[i] += tone->amplitude * static_cast<fl>(getWave(wave, tone->phase));
+				tone->phase += tone->frequency / SAMPLE_RATE;
 
-			if (tone->phase >= 1.0f) {
-				tone->phase -= 1.0f;
+				if (tone->phase >= 1.0f) {
+					tone->phase -= 1.0f;
+				}
 			}
 		}
-	}
 	}
 }
 
@@ -533,14 +643,22 @@ vo destroySound () {
 bool playOnDev (cca dev, us key, bool llAlreadyDown, bool start) {
 	sl tone = -1;
 	Ins ins;
-	if (aa.find(dev) != aa.end()) {
-		if ((ins = aa.at(dev)).ins == 0) tone = getKeyTone(key);
-		else tone = getKeyChord(key);
-	} else if (aa.find("") != aa.end()) {
-		if ((ins = aa.at("")).ins == 0) tone = getKeyTone(key);
-		else tone = getKeyChord(key);
+	if (aa.find(dev) != aa.end()) ins = aa.at(dev);
+	else if (aa.find("") != aa.end()) ins = aa.at("");
+	else return (false);
+	switch (ins.ins) {
+	case 0:
+		tone = getKeyTone(key);
+		break;
+	case 1:
+		tone = getKeyChord(key);
+		break;
+	case 2:
+		tone = getPianoTone(key);
+		break;
+	default:
+		return (false);
 	}
-	if (tone == -1) return (false); // doesn't block
 	if (start) playChord(tone, llAlreadyDown, ins.wave);
 	else stopChord(tone, ins.wave);
 	return (true);
@@ -570,6 +688,7 @@ vo startSound (wcr arg) {
 				st inss = *(++s);
 				if (inss.compare("acc") == 0) ins.ins = 0;
 				else if (inss.compare("bas") == 0) ins.ins = 1;
+				if (inss.compare("pia") == 0) ins.ins = 2;
 			}
 		}
 		printf("Wave: %d, ins %d\n", ins.wave, ins.ins);
@@ -577,11 +696,11 @@ vo startSound (wcr arg) {
 	}
 
 	for (ui wave = 0; wave < OSC_NO; wave++) {
-	for (ui i = 0; i < MAX_TONES; i++) {
-		audioData.tones[wave][i].frequency = toneToFreq(i + MIN_TONE);
-		audioData.tones[wave][i].phase = 0.0f;
-		audioData.tones[wave][i].active = 0; // Not active
-	}
+		for (ui i = 0; i < MAX_TONES; i++) {
+			audioData.tones[wave][i].frequency = toneToFreq(i + MIN_TONE);
+			audioData.tones[wave][i].phase = 0.0f;
+			audioData.tones[wave][i].active = 0; // Not active
+		}
 	}
 
 	SDL_AudioSpec spec;

@@ -6,12 +6,12 @@
 	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
 	eiðer version 3 of ðe License, or (at your option) any later version.
 
-	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
-	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
+	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
 	You should have received a copy of ðe GNU General Public License
-	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
+	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
@@ -90,7 +90,7 @@ constexpr us DOWNESHIFT4 = 40;
 
 constexpr us BUFSIZE = 4096;
 constexpr us SMALLBUFSIZE = 256;
-constexpr ul DOWNWAITMS = 1000;
+constexpr ul DOWNWAITMS = 500;
 
 constexpr us COMMANDSHIFT = 54;
 constexpr ul CRUN = 0x1; //CMD run
