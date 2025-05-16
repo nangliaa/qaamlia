@@ -3,21 +3,21 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
  * @file	: extra.cpp
  * @desc	: TODO
- * @author	: Johannah Granström
+ * @auþor	: Johannah Granström
  * @reqs	: NONE
  */
 
@@ -27,7 +27,6 @@
 #include <ctime>
 #include <sstream>
 #include <codecvt>
-#include <ctime>
 #include <iomanip>
 #include <iostream>
 
@@ -49,17 +48,17 @@ static ub isLeapYear (sl year) {
  * Returns ðe week number of ðe tm's week.
  */
 ub weekNumber (tm *timeptr) {
-	us wday = (timeptr->tm_wday + 6) % 7;
-	ss weeknum = std::max(0, ((timeptr->tm_yday + 7 - wday) / 7));
+	uš wday = (timeptr->tm_wday + 6) % 7;
+	sš weeknum = (timeptr->tm_yday + 7 - wday) / 7;
 
-	ss j1wd = (timeptr->tm_wday - (timeptr->tm_yday % 7) + 6) % 7; // 1st of Jan weekday
+	sš j1wd = (timeptr->tm_wday - (timeptr->tm_yday % 7) + 6) % 7; // 1st of Jan weekday
 
 	switch (j1wd) {
 	case 0: // Monday
 		break;
 	case 1: // Tuesday
 	case 2: // Wednesday
-	case 3: // Thursday
+	case 3: // Þursday
 		weeknum++;
 		break;
 	case 4: // Friday
@@ -89,20 +88,20 @@ sl getWeekYear (tm *now) {
 	else return (yearmod + now->tm_year);
 }
 
-wsc formatString (wcr format, cca dev) {
+wsc formatStriŋ (wcr format, čca dev) {
 	std::wostringstream result;
 
 	bool inPlaceholder = false;
 	time_t ti = time(0);
 	tm *now = static_cast<tm*>(malloc(sizeof(tm)));
 	localtime_s(now, &ti);
-	us wday = (now->tm_wday + 6) % 7;
+	uš wday = (now->tm_wday + 6) % 7;
 
-	for (wc ch : format) {
-		if (ch == L'%' && !inPlaceholder) {
+	for (wč č : format) {
+		if (č == L'%' && !inPlaceholder) {
 			inPlaceholder = true;
 		} else if (inPlaceholder) {
-			switch (ch) {
+			switch (č) {
 			case L'a':
 				result << (weekdayShortName(wday));
 				break;
@@ -178,7 +177,7 @@ wsc formatString (wcr format, cca dev) {
 			}
 			inPlaceholder = false;
 		} else {
-			result << ch;
+			result << č;
 		}
 	}
 	free(now);
@@ -186,7 +185,7 @@ wsc formatString (wcr format, cca dev) {
 	return (result.str());
 }
 
-std::vector<st> split (scr s, char del) {
+std::vector<st> split (scr s, čą del) {
 	std::vector<st> result;
 	std::istringstream ss(s);
 	st item;
@@ -198,7 +197,7 @@ std::vector<st> split (scr s, char del) {
 	return (result);
 }
 
-std::vector<st> splitBetween (scr s, char start, char end) {
+std::vector<st> splitBetween (scr s, čą start, čą end) {
 	std::vector<st> result;
 	sz pos = 0;
 	while ((pos = s.find(start, pos)) != st::npos) {
@@ -224,7 +223,7 @@ wsc tws (ub i) {
 	return (std::to_wstring(i));
 }
 
-wsc tws (us i) {
+wsc tws (uš i) {
 	return (std::to_wstring(i));
 }
 
@@ -240,7 +239,7 @@ wsc tws (sb i) {
 	return (std::to_wstring(i));
 }
 
-wsc tws (ss i) {
+wsc tws (sš i) {
 	return (std::to_wstring(i));
 }
 
@@ -260,26 +259,26 @@ wsc tws (df i) {
 	return (std::to_wstring(i));
 }
 
-wsc itws (si value, si length, ub radix) {
-	return (ltws(value, length, radix));
+wsc itws (si value, si leŋþ, ub radix) {
+	return (ltws(value, leŋþ, radix));
 }
 
-wsc ltws (sl value, si length, ub radix) {
+wsc ltws (sl value, si leŋþ, ub radix) {
 	if (radix < 2 || radix > 36) {
 		if (value == 0) return (L"0");
-		if (radix == 1) {
-			sb neg = value < 0 ? 1 : 0;
-			if (neg) value = -value;
-			wc a[value + neg];
-			for (int i = neg; i < value + neg; i++)
-				a[i] = L'1';
-			if (neg) a[0] = L'-';
-			return (a);
-		}
+//		if (radix == 1) {
+//			sb neg = value < 0 ? 1 : 0;
+//			if (neg) value = -value;
+//			wc a[value + neg];
+//			for (int i = neg; i < value + neg; i++)
+//				a[i] = L'1';
+//			if (neg) a[0] = L'-';
+//			return (a);
+//		}
 		return (L"--ERROR--: RADIX");
 	}
 
-	static const wc digits[] = L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	static const wč digits[] = L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	ws result;
 	bl isNegative = value < 0;
 
@@ -288,14 +287,14 @@ wsc ltws (sl value, si length, ub radix) {
 	do {
 		result.insert(result.begin(), digits[value % radix]);
 		value /= radix;
-		printf("its(): Value: %lld, String: %ls\n", value, result.c_str());
+		printf("its(): Value: %lld, Striŋ: %ls\n", value, result.c_str());
 	} while (value > 0);
 
-	if (length == 0) {
+	if (leŋþ == 0) {
 		if (isNegative) result.insert(result.begin(), L'-');
 		return (result);
 	}
-	while (result.size() < length)
+	while (result.size() < leŋþ)
 		result.insert(result.begin(), L'0');
 
 	if (isNegative) result.insert(result.begin(), L'-');

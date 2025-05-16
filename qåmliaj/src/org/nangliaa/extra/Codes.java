@@ -3,14 +3,14 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
@@ -59,7 +59,7 @@ public class Codes {
 	public static final int V_CARON = 0x8a; // VK_DEAD_CARON
 	public static final int V_CIRCUMFLEX = 0x82; // VK_DEAD_CIRCUMFLEX
 	public static final int V_Å = 0x5d; // VK_CLOSE_BRACKET
-	public static final int V_DIARAESIS = 0x87; // VK_SEMICOLON 3b / dead dieresis 87
+	public static final int V_DIARÆSIS = 0x87; // VK_SEMICOLON 3b / dead dieresis 87
 	public static final int V_Ö = 0xc0; // VK_BACK_QUOTE
 	public static final int V_Ä = 0xde; // VK_QUOTE
 	public static final int V_APOSTROPHE = 0x2f; // VK_SLASH

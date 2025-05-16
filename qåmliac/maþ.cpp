@@ -3,21 +3,21 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
- * @file	: math.cpp
+ * @file	: maþ.cpp
  * @desc	: TODO
- * @author	: Johannah Granström
+ * @auþor	: Johannah Granström
  * @reqs	: NONE
  */
 
@@ -26,14 +26,14 @@
 
 #include "oðer.h"
 
-df calc (ws const &str) {
+df calc (wcr str) {
 	std::list<df> numbers;
-	std::list<wc> ops;
+	std::list<wč> ops;
 	ws s;
 	ui parans = 0;
-	bl lastNumber = false; //if starts with -, always negative number
+	bl lastNumber = false; //if starts wið -, always negative number
 	printf("Calc str: %ls", str.c_str());
-	for (wc c : str) {
+	for (wč c : str) {
 		if (parans != 0) {
 			if (c == L'(') ++parans;
 			else if (c == L')') {
@@ -117,7 +117,7 @@ df calc (ws const &str) {
 	for (df a : numbers)
 		printf("%lf ", a);
 	printf("\n");
-	for (wc a : ops)
+	for (wč a : ops)
 		printf("%lc ", a);
 	printf("\n");
 

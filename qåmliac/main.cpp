@@ -3,21 +3,21 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
  * @file	: init.cpp
  * @desc	: TODO
- * @author	: Johannah Granström
+ * @auþor	: Johannah Granström
  * @reqs	: NONE
  */
 
@@ -38,19 +38,19 @@ JavaVM *jvm;
 JNIEnv *env;
 jobject callbackObj;
 
-std::set<std::pair<us, cca>> down;
-std::unordered_set<us> downAny;
+std::set<std::pair<uš, čca>> down;
+std::unordered_set<uš> downAny;
 //std::unordered_set<us> downLL;
-std::map<us, us> remaps;
+std::map<uš, uš> remaps;
 
 std::map<std::pair<ul, carga>, ws> msa;
 
-std::unordered_set<us> blockList;
-std::unordered_set<us> ctrlBlockList;
+std::unordered_set<uš> blockList;
+std::unordered_set<uš> ctrlBlockList;
 ul lastTimePressed;
 ws paþ;
 
-bool playing = false;
+bool playiŋ = false;
 bool llAlreadyDown = false;
 bool ctrlDown;
 bool ffDown;
@@ -88,13 +88,13 @@ struct retur {
 	}
 };
 
-static jstring wstringToJstring (JNIEnv *env, wcr wstr) {
-	std::wstring_convert<std::codecvt_utf8_utf16<wc>> converter;
+static jstring wstriŋToJstriŋ (JNIEnv *env, wcr wstr) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wč>> converter;
 	st utf8str = converter.to_bytes(wstr);
 	return (env->NewStringUTF(utf8str.c_str()));
 }
 
-static void javaVoidStringCall (cca meþod, wcr param1) {
+static void javaVoidStriŋCall (čca meþod, wcr param1) {
 	if (callbackObj) {
 		JNIEnv *env;
 		if (jvm->AttachCurrentThread((void**) &env, NULL) != JNI_OK) return;
@@ -103,13 +103,13 @@ static void javaVoidStringCall (cca meþod, wcr param1) {
 		jmethodID mid = env->GetMethodID(cls, meþod, "(Ljava/lang/String;)V");
 
 		if (mid) {
-			env->CallVoidMethod(callbackObj, mid, wstringToJstring(env, param1));
+			env->CallVoidMethod(callbackObj, mid, wstriŋToJstriŋ(env, param1));
 		}
 
 		jvm->DetachCurrentThread();
 	}
 }
-static int javaIntStringCall (cca meþod, wcr param1) {
+static int javaIntStriŋCall (čca meþod, wcr param1) {
 	jint a;
 	if (callbackObj) {
 		JNIEnv *env;
@@ -119,7 +119,7 @@ static int javaIntStringCall (cca meþod, wcr param1) {
 		jmethodID mid = env->GetMethodID(cls, meþod, "(Ljava/lang/String;)I");
 
 		if (mid) {
-			a = env->CallIntMethod(callbackObj, mid, wstringToJstring(env, param1));
+			a = env->CallIntMethod(callbackObj, mid, wstriŋToJstriŋ(env, param1));
 		}
 
 		jvm->DetachCurrentThread();
@@ -138,9 +138,9 @@ void initFile (wcr lpaþ) {
 	paþ = lpaþ;
 	enterInit();
 
-	wc line[BUFSIZE];
+	wč line[BUFSIZE];
 
-	us press = 0;
+	uš press = 0;
 	ws args[2] { };
 	ws device;
 
@@ -177,7 +177,7 @@ void initFile (wcr lpaþ) {
 	}
 
 	for (auto r = fileContent.begin(); r != fileContent.end(); r++) {
-		wc c = *r;
+		wč c = *r;
 		if (curly) {
 			switch (c) {
 			case L'$':
@@ -193,7 +193,7 @@ void initFile (wcr lpaþ) {
 					ub downNo = 0;
 					std::array<ul, DOWNENO> a = { };
 					downe.push_back(a);
-					for (wc t : downeStr) {
+					for (wč t : downeStr) {
 						switch (t) {
 						case L'\t':
 						case L'\n':
@@ -206,7 +206,7 @@ void initFile (wcr lpaþ) {
 						}
 							break;
 						default:
-							downe.back()[downNo++] = chari(t);
+							downe.back()[downNo++] = čari(t);
 						}
 					}
 					downeStr = L"";
@@ -216,7 +216,7 @@ void initFile (wcr lpaþ) {
 						std::array<ul, DOWNENO> cas = downe.at(i);
 						msa.insert(
 								std::pair<std::pair<ul, carga>, ws>(
-										std::pair<ul, carga>(cmd | (cas[3] << DOWNESHIFT4) | (cas[2] << DOWNESHIFT3) | (cas[1] << DOWNESHIFT2) | (cas[0] << DOWNESHIFT1) | press,
+										std::pair<ul, carga>(cmd | (cas[3] << DOWNEŠIFT4) | (cas[2] << DOWNEŠIFT3) | (cas[1] << DOWNEŠIFT2) | (cas[0] << DOWNEŠIFT1) | press,
 												m), args[1]));
 					}
 					deviceName = L"";
@@ -322,7 +322,7 @@ void initFile (wcr lpaþ) {
 		} else if (paran) {
 			switch (c) {
 			case L'½':
-				press = chari(*(++r), *(++r)); // get ðe two next
+				press = čari(*(++r), *(++r)); // get ðe two next
 				break;
 			case L')':
 				paran = false;
@@ -344,14 +344,14 @@ void initFile (wcr lpaþ) {
 				varRepl = false;
 				break;
 			case L'-':
-				if (press == 0) press = chari(c);
+				if (press == 0) press = čari(c);
 				else {
 					cmdarg = true;
 					varRepl = false;
 				}
 				break;
 			case L'½':
-				press = chari(*(++r), *(++r)); // get ðe two next
+				press = čari(*(++r), *(++r)); // get ðe two next
 				break;
 			case L'(':
 				paran = true;
@@ -370,7 +370,7 @@ void initFile (wcr lpaþ) {
 			case L' ':
 				continue;
 			default:
-				if (press == 0) press = chari(c);
+				if (press == 0) press = čari(c);
 			}
 		}
 	}
@@ -378,7 +378,7 @@ void initFile (wcr lpaþ) {
 	exitInit();
 }
 
-static bool isBlocked (us key) {
+static bool isBlocked (uš key) {
 	return (blockList.find(key) != blockList.end() || ctrlBlockList.find(key) != ctrlBlockList.end());
 }
 
@@ -386,41 +386,41 @@ static bool isBlocked (us key) {
 //	return (ctrlBlockList.find(key) != ctrlBlockList.end());
 //}
 
-static bool isdown (us key, const ch *device) {
+static bool isdown (uš key, const čą *device) {
 	if (key == 0) return (true);
 	if (strcmp(device, anyKB) == 0) return (downAny.find(key) != downAny.end());
 	return (down.find( { key, device }) != down.end());
 }
 
-static bool checkCarg (carga const &ca, ub a, std::string compare) {
-	for (scr each : split(ca[a], '|'))
-		if (each.compare(compare) == 0) return (true);
+static bool čeckCarg (carga const &ca, ub a, scr compare) {
+	for (scr eač : split(ca[a], '|'))
+		if (eač.compare(compare) == 0) return (true);
 	return (false);
 }
 
 /// downs don't matter keyboard right now.
-static bool checkCom (std::pair<std::pair<ul, carga> const, ws> const &com, cca dev, bool ll, bool rel) {
+static bool čeckCom (std::pair<std::pair<ul, carga> const, ws> const &com, čca dev, bool ll, bool rel) {
 	if ((rel && (com.first.first >> COMMANDSHIFT) != CREMAP) || (ll && (com.first.second[0].length() != 0 || com.second.find(L"%D") != com.second.npos))) return (false); // save for raw hook if triggered or telliŋ
-	if (!isdown((com.first.first >> DOWNESHIFT1) & KEYMASK, anyKB)) return (false);
-	if (!isdown((com.first.first >> DOWNESHIFT2) & KEYMASK, anyKB)) return (false);
-	if (!isdown((com.first.first >> DOWNESHIFT3) & KEYMASK, anyKB)) return (false);
-	if (!isdown((com.first.first >> DOWNESHIFT4) & KEYMASK, anyKB)) return (false);
-	if (!ll && com.first.second[0].length() != 0 && !checkCarg(com.first.second, 0, dev)) return (false);
-	if (com.first.second[1].length() != 0 && !checkCarg(com.first.second, 1, watst(activeWindowNameW().c_str()))) return (false);
-	if (com.first.second[2].length() != 0 && !checkCarg(com.first.second, 2, watst(activeProcessNameW().c_str()))) return (false);
+	if (!isdown((com.first.first >> DOWNEŠIFT1) & KEYMASK, anyKB)) return (false);
+	if (!isdown((com.first.first >> DOWNEŠIFT2) & KEYMASK, anyKB)) return (false);
+	if (!isdown((com.first.first >> DOWNEŠIFT3) & KEYMASK, anyKB)) return (false);
+	if (!isdown((com.first.first >> DOWNEŠIFT4) & KEYMASK, anyKB)) return (false);
+	if (!ll && com.first.second[0].length() != 0 && !čeckCarg(com.first.second, 0, dev)) return (false);
+	if (com.first.second[1].length() != 0 && !čeckCarg(com.first.second, 1, watst(activeWindowNameW().c_str()))) return (false);
+	if (com.first.second[2].length() != 0 && !čeckCarg(com.first.second, 2, watst(activeProcessNameW().c_str()))) return (false);
 	return (true);
 }
 
-static retur getMouseAction (us key, int mx, int my, cca dev, bool ll) {
+static retur getMouseAcṫon (uš key, int mx, int my, čca dev, bool ll) {
 	if (ll) {
 		for (std::pair<std::pair<ul, carga> const, ws> const &pair : msa) {
-			if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, false)) {
+			if ((pair.first.first & KEYMASK) == key && čeckCom(pair, dev, ll, false)) {
 				return (retur(true, pair.second, pair.first.first, false));
 			}
 		}
 	} else {
 		for (std::pair<std::pair<ul, carga> const, ws> const &pair : msa) {
-			if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, false)) {
+			if ((pair.first.first & KEYMASK) == key && čeckCom(pair, dev, ll, false)) {
 				return (retur(true, pair.second, pair.first.first, false));
 			}
 		}
@@ -431,7 +431,7 @@ static retur getMouseAction (us key, int mx, int my, cca dev, bool ll) {
 static vo clearIfUnpressed (ul time) {
 	if (time > lastTimePressed) { // If 500 ms has passed, no key should be pressed
 //		for (int key = 0; key < VFF; key++) {
-//			if (GetAsyncKeyState(key) & 0x8000) { // Check if ðe high-order bit is set
+//			if (GetAsyncKeyState(key) & 0x8000) { // Čeck if ðe high-order bit is set
 //				return;
 //			}
 //		}
@@ -441,23 +441,24 @@ static vo clearIfUnpressed (ul time) {
 }
 
 /**
- * getKeyAction
+ * getKeyAcṫon
  */
-static retur getKeyAction (us key, bool released, char const *dev, bool ll) {
-	ul time = getTime();
-
-	clearIfUnpressed(time);
-	lastTimePressed = time + DOWNWAITMS;
+static retur getKeyAcṫon (uš key, bool released, čca dev, bool ll) {
+	if (!playiŋ) {
+		ul time = getTime();
+		clearIfUnpressed(time);
+		lastTimePressed = time + DOWNWAITMS;
+	}
 
 	if (ll) {
-		if (checkAllowQueue(key)) return (retur(false, EMPTY_STRING, 0, false));
+		if (čeckAllowQueue(key)) return (retur(false, EMPTY_STRING, 0, false));
 		if (!released) {
 			llAlreadyDown = isdown(key, anyKB);
 			downAny.insert(key);
 			//downLL.insert(key);
 
 			for (std::pair<std::pair<ul, carga> const, ws> const &pair : msa) {
-				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, false)) return (retur(true, pair.second, pair.first.first, false));
+				if ((pair.first.first & KEYMASK) == key && čeckCom(pair, dev, ll, false)) return (retur(true, pair.second, pair.first.first, false));
 			}
 
 			return (retur(isBlocked(key), EMPTY_STRING, 0, false));
@@ -466,29 +467,29 @@ static retur getKeyAction (us key, bool released, char const *dev, bool ll) {
 			//downLL.erase(key);
 
 			for (std::pair<std::pair<ul, carga> const, ws> const &pair : msa) {
-				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, true)) return (retur(true, pair.second, pair.first.first, true));
+				if ((pair.first.first & KEYMASK) == key && čeckCom(pair, dev, ll, true)) return (retur(true, pair.second, pair.first.first, true));
 			}
 
 			return (retur(isBlocked(key), EMPTY_STRING, 0, true));
 		}
 	} else {
-		if (checkAllowQueue(key)) {
+		if (čeckAllowQueue(key)) {
 			popAllowQueue();
 			return (retur(false, EMPTY_STRING, 0, false));
 		}
 		if (!released) {
 			down.insert( { key, dev });
-			if (playing) return (retur(playOnDev(dev, key, llAlreadyDown, true), EMPTY_STRING, 0, false));
+			if (playiŋ) return (retur(playOnDev(dev, key, llAlreadyDown, true), EMPTY_STRING, 0, false));
 
 			for (const auto &pair : msa) {
-				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, false)) return (retur(true, pair.second, pair.first.first, false));
+				if ((pair.first.first & KEYMASK) == key && čeckCom(pair, dev, ll, false)) return (retur(true, pair.second, pair.first.first, false));
 			}
 		} else {
 			down.erase( { key, dev });
-			if (playing) return (retur(playOnDev(dev, key, llAlreadyDown, false), EMPTY_STRING, 0, true));
+			if (playiŋ) return (retur(playOnDev(dev, key, llAlreadyDown, false), EMPTY_STRING, 0, true));
 
 			for (const auto &pair : msa) {
-				if ((pair.first.first & KEYMASK) == key && checkCom(pair, dev, ll, true)) return (retur(true, pair.second, pair.first.first, true));
+				if ((pair.first.first & KEYMASK) == key && čeckCom(pair, dev, ll, true)) return (retur(true, pair.second, pair.first.first, true));
 			}
 		}
 	}
@@ -498,7 +499,7 @@ static retur getKeyAction (us key, bool released, char const *dev, bool ll) {
 static void calculate () {
 	ui previousSequenceNumber = GetClipboardSequenceNumber();
 	copy();
-	printf("Waiting... %X", previousSequenceNumber);
+	printf("Waitiŋ... %X", previousSequenceNumber);
 	int i = 0;
 	while (i < 10) {
 		++i;
@@ -540,45 +541,45 @@ static void releaseAll () {
 	downAny.clear();
 }
 
-static bool execute (us vk, retur breaka, bool ll, cca dev) {
+static bool execute (uš vk, retur breaka, bool ll, čca dev) {
 	if (!ll) bufPush(vk, breaka.breaka);
 	if (breaka.command != 0) {
 		breaka.command >>= COMMANDSHIFT;
 		if (breaka.command != CREMAP && breaka.rel) return (breaka.breaka);
 		switch (breaka.command) {
 		case CRUN:
-			run(formatString(breaka.arg, dev));
+			run(formatStriŋ(breaka.arg, dev));
 			break;
 		case CCALC:
 			calculate();
 			break;
 		case CPASTE:
-			paste(formatString(breaka.arg, dev));
+			paste(formatStriŋ(breaka.arg, dev));
 			break;
 		case CPASTES:
-			pasteS(formatString(breaka.arg, dev));
+			pasteS(formatStriŋ(breaka.arg, dev));
 			break;
-		case CAUTH:
-			paste(itws(javaIntStringCall("auth", breaka.arg), 6, DEC));
+		case CAUÞ:
+			paste(itws(javaIntStriŋCall("auþ", breaka.arg), 6, DEC));
 			break;
 		case CWINDOW:
-			javaVoidStringCall("window", formatString(breaka.arg, dev));
+			javaVoidStriŋCall("window", formatStriŋ(breaka.arg, dev));
 			releaseAll();
 			break;
 		case CLIA:
-			javaVoidStringCall("lia", formatString(breaka.arg, dev));
+			javaVoidStriŋCall("lia", formatStriŋ(breaka.arg, dev));
 			releaseAll();
 			break;
 		case CROBOT:
-			javaVoidStringCall("robot", breaka.arg);
+			javaVoidStriŋCall("robot", breaka.arg);
 			break;
 		case CREMAP:
 			if (breaka.arg[0] == L'½') {
-				if (breaka.rel) release(chari(breaka.arg[2], breaka.arg[1])); // bc chari beiŋ opposite order
-				else press(chari(breaka.arg[2], breaka.arg[1]));
+				if (breaka.rel) release(čari(breaka.arg[2], breaka.arg[1])); // bc čari beiŋ opposite order
+				else press(čari(breaka.arg[2], breaka.arg[1]));
 			} else {
-				if (breaka.rel) release(chari(breaka.arg[0]));
-				else press(chari(breaka.arg[0]));
+				if (breaka.rel) release(čari(breaka.arg[0]));
+				else press(čari(breaka.arg[0]));
 			}
 			break;
 		case CRELOAD:
@@ -587,8 +588,8 @@ static bool execute (us vk, retur breaka, bool ll, cca dev) {
 			initFile(paþ);
 			break;
 		case CMUSIC:
-			playing = !playing;
-			if (playing) startSound(breaka.arg);
+			playiŋ = !playiŋ;
+			if (playiŋ) startSound(breaka.arg);
 			else destroySound();
 			break;
 		case CEXIT:
@@ -598,27 +599,27 @@ static bool execute (us vk, retur breaka, bool ll, cca dev) {
 	return (breaka.breaka);
 }
 
-sb function (us vk, int flag, int make, cca deviceName) {
+sb funcṫon (uš vk, int flag, int make, čca deviceName) {
 	retur breaka = retur(false, L"", 0x0, false);
 	bool released = flag & RI_KEY_BREAK;
 	switch (vk) {
-	case VSHIFT:
-		if (make == 0x2A) breaka = getKeyAction(VLSHIFT, released, deviceName, false);
-		else if (make == 0x36) breaka = getKeyAction(VRSHIFT, released, deviceName, false);
+	case VŠIFT:
+		if (make == 0x2A) breaka = getKeyAcṫon(VLŠIFT, released, deviceName, false);
+		else if (make == 0x36) breaka = getKeyAcṫon(VRŠIFT, released, deviceName, false);
 		break;
 	case VCTRL:
 		if (strcmp(deviceName, nullDevice) == 0) ctrlDown = true; //device is 0 if pressed as part of alt gr
-		else if ((flag & RI_KEY_E0) == 0) breaka = getKeyAction(VLCTRL, released, deviceName, false);
-		else breaka = getKeyAction(VRCTRL, released, deviceName, false);
+		else if ((flag & RI_KEY_E0) == 0) breaka = getKeyAcṫon(VLCTRL, released, deviceName, false);
+		else breaka = getKeyAcṫon(VRCTRL, released, deviceName, false);
 		break;
 	case VALT:
-		if ((flag & RI_KEY_E0) == 0) breaka = getKeyAction(VLALT, released, deviceName, false);
-		else if (ctrlDown) breaka = getKeyAction(VALTGR, released, deviceName, false);
-		else breaka = getKeyAction(VRALT, released, deviceName, false);
+		if ((flag & RI_KEY_E0) == 0) breaka = getKeyAcṫon(VLALT, released, deviceName, false);
+		else if (ctrlDown) breaka = getKeyAcṫon(VALTGR, released, deviceName, false);
+		else breaka = getKeyAcṫon(VRALT, released, deviceName, false);
 		break;
 	case VCTRLNUMLOCK: //FLAG 4 INSTEAD OF 2
-		if ((flag & RI_KEY_E1) == 0) breaka = getKeyAction(VCTRLNUMLOCK, released, deviceName, false);
-		else breaka = getKeyAction(VPAUSE, released, deviceName, false); //NORMAL
+		if ((flag & RI_KEY_E1) == 0) breaka = getKeyAcṫon(VCTRLNUMLOCK, released, deviceName, false);
+		else breaka = getKeyAcṫon(VPAUSE, released, deviceName, false); //NORMAL
 		break;
 	case VRETURN: //OPPOSITE NUM
 	case VNUMPGUP:
@@ -631,8 +632,8 @@ sb function (us vk, int flag, int make, cca deviceName) {
 	case VNUMDOWN:
 	case VNUMINS:
 	case VNUMDEL:
-		if ((flag & RI_KEY_E0) == 0) breaka = getKeyAction(vk, released, deviceName, false);
-		else breaka = getKeyAction(vk | 0x100, released, deviceName, false); //Non-numpad
+		if ((flag & RI_KEY_E0) == 0) breaka = getKeyAcṫon(vk, released, deviceName, false);
+		else breaka = getKeyAcṫon(vk | 0x100, released, deviceName, false); //Non-numpad
 		break;
 	case VFF:
 		ffDown = true;
@@ -643,7 +644,7 @@ sb function (us vk, int flag, int make, cca deviceName) {
 //		}
 //		break;
 	default:
-		breaka = getKeyAction(vk, released, deviceName, false);
+		breaka = getKeyAcṫon(vk, released, deviceName, false);
 		break;
 	}
 	ctrlDown = vk == VK_CONTROL && strcmp(deviceName, nullDevice) == 0;
@@ -651,59 +652,59 @@ sb function (us vk, int flag, int make, cca deviceName) {
 	return (execute(vk, breaka, false, deviceName) ? 1 : 0);
 }
 
-bool mouseFunction (ul vk, sl mx, sl my, cca deviceName) {
+bool mouseFuncṫon (ul vk, sl mx, sl my, čca deviceName) {
 	retur breaka = retur(false, L"", 0x0, false);
 
 	switch (vk) {
 	case RI_MOUSE_LEFT_BUTTON_DOWN:
-		breaka = getKeyAction(VML, false, deviceName, false);
+		breaka = getKeyAcṫon(VML, false, deviceName, false);
 		break;
 	case RI_MOUSE_LEFT_BUTTON_UP:
-		breaka = getKeyAction(VML, true, deviceName, false);
+		breaka = getKeyAcṫon(VML, true, deviceName, false);
 		break;
 	case RI_MOUSE_RIGHT_BUTTON_DOWN:
-		breaka = getKeyAction(VMR, false, deviceName, false);
+		breaka = getKeyAcṫon(VMR, false, deviceName, false);
 		break;
 	case RI_MOUSE_RIGHT_BUTTON_UP:
-		breaka = getKeyAction(VMR, true, deviceName, false);
+		breaka = getKeyAcṫon(VMR, true, deviceName, false);
 		break;
 	case RI_MOUSE_MIDDLE_BUTTON_DOWN:
-		breaka = getKeyAction(VMM, false, deviceName, false);
+		breaka = getKeyAcṫon(VMM, false, deviceName, false);
 		break;
 	case RI_MOUSE_MIDDLE_BUTTON_UP:
-		breaka = getKeyAction(VMM, true, deviceName, false);
+		breaka = getKeyAcṫon(VMM, true, deviceName, false);
 		break;
 	case RI_MOUSE_BUTTON_4_DOWN:
-		breaka = getKeyAction(VM4, false, deviceName, false);
+		breaka = getKeyAcṫon(VM4, false, deviceName, false);
 		break;
 	case RI_MOUSE_BUTTON_4_UP:
-		breaka = getKeyAction(VM4, true, deviceName, false);
+		breaka = getKeyAcṫon(VM4, true, deviceName, false);
 		break;
 	case RI_MOUSE_BUTTON_5_DOWN:
-		breaka = getKeyAction(VM5, false, deviceName, false);
+		breaka = getKeyAcṫon(VM5, false, deviceName, false);
 		break;
 	case RI_MOUSE_BUTTON_5_UP:
-		breaka = getKeyAction(VM5, true, deviceName, false);
+		breaka = getKeyAcṫon(VM5, true, deviceName, false);
 		break;
 	case RI_MWD:
-		breaka = getMouseAction(VMWD, mx, my, deviceName, false);
+		breaka = getMouseAcṫon(VMWD, mx, my, deviceName, false);
 		break;
 	case RI_MWU:
-		breaka = getMouseAction(VMWU, mx, my, deviceName, false);
+		breaka = getMouseAcṫon(VMWU, mx, my, deviceName, false);
 		break;
 	default:
-		breaka = getMouseAction(VMM, mx, my, deviceName, false);
+		breaka = getMouseAcṫon(VMM, mx, my, deviceName, false);
 	}
 	return (execute(vk, breaka, false, deviceName));
 }
 
-bool functionLL (us vk, int flag) {
+bool funcṫonLL (uš vk, int flag) {
 	retur breaka = retur(false, EMPTY_STRING, 0x0, false);
 	bool released = flag & 0x80;
 	switch (vk) {
 	case VCTRLNUMLOCK: //OPPOSITE HL HOOK
-		if ((flag & 1) == 0) breaka = getKeyAction(VPAUSE, released, anyKB, true);
-		else breaka = getKeyAction(VCTRLNUMLOCK, released, anyKB, true);
+		if ((flag & 1) == 0) breaka = getKeyAcṫon(VPAUSE, released, anyKB, true);
+		else breaka = getKeyAcṫon(VCTRLNUMLOCK, released, anyKB, true);
 		break;
 	case VRETURN: //OPPOSITE
 	case VNUMPGUP:
@@ -716,8 +717,8 @@ bool functionLL (us vk, int flag) {
 	case VNUMDOWN:
 	case VNUMINS:
 	case VNUMDEL:
-		if ((flag & 1) == 0) breaka = getKeyAction(vk, released, anyKB, true);
-		else breaka = getKeyAction(vk | 0x100, released, anyKB, true); //Non-numpad
+		if ((flag & 1) == 0) breaka = getKeyAcṫon(vk, released, anyKB, true);
+		else breaka = getKeyAcṫon(vk | 0x100, released, anyKB, true); //Non-numpad
 		break;
 	case VFF:
 		//ffDown = true;
@@ -727,7 +728,7 @@ bool functionLL (us vk, int flag) {
 		//else {} //ctrl printscreen
 		//break;
 	default:
-		breaka = getKeyAction(vk, released, anyKB, true);
+		breaka = getKeyAcṫon(vk, released, anyKB, true);
 		break;
 	}
 	//ctrlDown = vk == VK_CONTROL && wcscmp(deviceName, nullDevice) == 0;

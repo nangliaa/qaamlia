@@ -3,21 +3,21 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
  * @file	: os.cpp
  * @desc	: TODO
- * @author	: Johannah Granström
+ * @auþor	: Johannah Granström
  * @reqs	: NONE
  */
 
@@ -32,8 +32,8 @@
 HWND hwnd;
 
 void copyToClipboard (wcr text) {
-	wc const *nts = text.c_str();
-	size_t size = (wcslen(nts) + 1) * sizeof(wc);
+	wč const *nts = text.c_str();
+	sz size = (wcslen(nts) + 1) * sizeof(wč);
 	HGLOBAL glob = GlobalAlloc(GMEM_FIXED, size);
 	memcpy(glob, nts, size);
 
@@ -74,7 +74,7 @@ wsc getFromClipboard () {
 			printf("Clipboard does not contain text in Unicode format (in)\n");
 		}
 
-		wc *pText = static_cast<wc*>(GlobalLock(hData));
+		wč *pText = static_cast<wč*>(GlobalLock(hData));
 		if (pText != nullptr) {
 			result = pText;
 		}
@@ -91,7 +91,7 @@ void setHWND (HWND hwand) {
 	hwnd = hwand;
 }
 
-st const watst (wca wstr) {
+st const watst (wča wstr) {
 	if (*wstr == L'\0') return ("");
 	si size_needed = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, nullptr, 0, nullptr, nullptr);
 	st str(size_needed, 0);
@@ -100,10 +100,10 @@ st const watst (wca wstr) {
 	return (str);
 }
 
-wsc catws (cca str) {
+wsc catws (čca str) {
 	if (*str == '\0') return (L"");
 	std::cerr << "cewcfew" << std::endl;
-	int size_needed = MultiByteToWideChar(CP_UTF8, 0, str, -1, nullptr, 0);
+	si size_needed = MultiByteToWideChar(CP_UTF8, 0, str, -1, nullptr, 0);
 	ws wstr(size_needed, 0);
 	MultiByteToWideChar(CP_UTF8, 0, str, -1, &wstr[0], size_needed);
 	return (wstr);
@@ -119,7 +119,7 @@ st const activeProcessNameA () {
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
 	if (!hProcess) return ("");
 
-	char exePaþ[MAX_PATH];
+	čą exePaþ[MAX_PATH];
 	if (GetProcessImageFileNameA(hProcess, exePaþ, MAX_PATH)) {
 		CloseHandle(hProcess);
 		return (exePaþ);
@@ -133,8 +133,8 @@ st const activeWindowNameA () {
 	HWND hwnd = GetForegroundWindow();
 	if (!hwnd) return ("");
 
-	char title[SMALLBUFSIZE];
-	GetWindowTextA(hwnd, title, sizeof(title) / sizeof(char));
+	čą title[SMALLBUFSIZE];
+	GetWindowTextA(hwnd, title, sizeof(title) / sizeof(čą));
 	return (title);
 }
 
@@ -148,7 +148,7 @@ wsc activeProcessNameW () {
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
 	if (!hProcess) return (L"");
 
-	wc exePaþ[MAX_PATH];
+	wč exePaþ[MAX_PATH];
 	if (GetProcessImageFileNameW(hProcess, exePaþ, MAX_PATH)) {
 		CloseHandle(hProcess);
 		return (exePaþ);
@@ -158,7 +158,7 @@ wsc activeProcessNameW () {
 	return (L"");
 }
 
-wc getFileSeparator () {
+wč getFileSeparator () {
 	return (L'\\');
 }
 
@@ -166,8 +166,8 @@ wsc activeWindowNameW () {
 	HWND hwnd = GetForegroundWindow();
 	if (!hwnd) return (L"");
 
-	wc title[SMALLBUFSIZE];
-	GetWindowTextW(hwnd, title, sizeof(title) / sizeof(wc));
+	wč title[SMALLBUFSIZE];
+	GetWindowTextW(hwnd, title, sizeof(title) / sizeof(wč));
 	return (title);
 }
 
@@ -180,7 +180,7 @@ void osExit (int statusCode) {
 	exit(0);
 }
 
-void press (us key) {
+void press (uš key) {
 	INPUT inputs[1] = { };
 
 	inputs[0].type = INPUT_KEYBOARD;
@@ -194,7 +194,7 @@ void press (us key) {
 	}
 }
 
-void release (us key) {
+void release (uš key) {
 	INPUT inputs[1] = { };
 
 	inputs[0].type = INPUT_KEYBOARD;
@@ -209,7 +209,7 @@ void release (us key) {
 	}
 }
 
-void simulateKeyPress (us vk) {
+void simulateKeyPress (uš vk) {
 	INPUT input = { 0 };
 	input.type = INPUT_KEYBOARD;
 	input.ki.wVk = vk;
@@ -246,15 +246,14 @@ void copy () {
 }
 
 void paste (wcr word) {
-	printf("Pasting %ls", word.c_str());
+	printf("Pastiŋ %ls", word.c_str());
 	copyToClipboard(word);
-	printf("Pasting\n");
 //	HWND hwnd = GetForegroundWindow();
 //	if (!hwnd) {
-//		printf("No working hwnd\n");
+//		printf("No workiŋ hwnd\n");
 //		return;
 //	}
-//	char title[256];
+//	čą title[256];
 //	GetWindowTextA(hwnd, title, sizeof(title)); // Get window title
 //	std::cout << "Active Window Handle: " << hwnd << std::endl;
 //	std::cout << "Active Window Title: " << title << std::endl;
@@ -317,9 +316,9 @@ void run (wcr command) {
 	STARTUPINFOW si = { 0 };
 	PROCESS_INFORMATION pi = { 0 };
 
-	si.cb = sizeof(si); // Set the size of the structure
+	si.cb = sizeof(si); // Set ðe size of ðe structure
 
-	wc ProcessName[BUFSIZE];
+	wč ProcessName[BUFSIZE];
 	wcscpy_s(ProcessName, command.c_str());
 
 	if (CreateProcessW(NULL, ProcessName, NULL, NULL, false, CREATE_NEW_PROCESS_GROUP | DETACHED_PROCESS, NULL, NULL, &si, &pi)) {
@@ -333,7 +332,7 @@ void run (wcr command) {
 
 #endif
 #ifndef WIN
-wc getFileSeparator () {
+wč getFileSeparator () {
 	return (L'/');
 }
 #endif

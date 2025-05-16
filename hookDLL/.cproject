@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="org.eclipse.cdt.msvc.exe.debug.1340068546">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.eclipse.cdt.msvc.exe.debug.1340068546" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+				<externalSettings>
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/hookDLL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/hookDLL/Debug"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="hookDLL" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.PE64" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.VCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="dll" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" description="" id="org.eclipse.cdt.msvc.exe.debug.1340068546" name="Debug" optionalBuildProperties="org.eclipse.cdt.docker.launcher.containerbuild.property.selectedvolumes=,org.eclipse.cdt.docker.launcher.containerbuild.property.volumes=" parent="org.eclipse.cdt.msvc.exe.debug">
+					<folderInfo id="org.eclipse.cdt.msvc.exe.debug.1340068546." name="/" resourcePath="">
+						<toolChain id="org.eclipse.cdt.msvc.toolchain.exe.debug.751590984" name="Microsoft Visual C++" superClass="org.eclipse.cdt.msvc.toolchain.exe.debug">
+							<targetPlatform id="org.eclipse.cdt.msvc.targetPlatform.exe.debug.115577534" superClass="org.eclipse.cdt.msvc.targetPlatform.exe.debug"/>
+							<builder buildPath="${workspace_loc:/hookDLL}/Debug" id="org.eclipse.cdt.msvc.builder.2104078257" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.msvc.builder"/>
+							<tool id="org.eclipse.cdt.msvc.cl.c.exe.debug.860249890" name="C Compiler (cl)" superClass="org.eclipse.cdt.msvc.cl.c.exe.debug">
+								<option id="org.eclipse.cdt.msvc.cl.option.optimization.607913929" name="Optimization" superClass="org.eclipse.cdt.msvc.cl.option.optimization" value="org.eclipse.cdt.msvc.cl.option.optimization.default" valueType="enumerated"/>
+								<option id="org.eclipse.cdt.msvc.cl.option.debugFormat.1321448482" name="Debug Information Format" superClass="org.eclipse.cdt.msvc.cl.option.debugFormat" value="org.eclipse.cdt.msvc.cl.option.debugFormat.complete" valueType="enumerated"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="org.eclipse.cdt.msvc.cl.option.macros.80936816" superClass="org.eclipse.cdt.msvc.cl.option.macros" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="HOOKDLL_EXPORTS"/>
+								</option>
+								<inputType id="org.eclipse.cdt.msvc.cl.inputType.c.1706575015" superClass="org.eclipse.cdt.msvc.cl.inputType.c"/>
+							</tool>
+							<tool id="org.eclipse.cdt.msvc.cl.exe.debug.1900671840" name="C++ Compiler (cl)" superClass="org.eclipse.cdt.msvc.cl.exe.debug">
+								<option id="org.eclipse.cdt.msvc.cl.option.optimization.459979075" name="Optimization" superClass="org.eclipse.cdt.msvc.cl.option.optimization" value="org.eclipse.cdt.msvc.cl.option.optimization.default" valueType="enumerated"/>
+								<option id="org.eclipse.cdt.msvc.cl.option.debugFormat.1992883541" name="Debug Information Format" superClass="org.eclipse.cdt.msvc.cl.option.debugFormat" value="org.eclipse.cdt.msvc.cl.option.debugFormat.complete" valueType="enumerated"/>
+							</tool>
+							<tool id="org.eclipse.cdt.msvc.rc.exe.debug.981146340" name="Resource Compiler (rc)" superClass="org.eclipse.cdt.msvc.rc.exe.debug">
+								<inputType id="org.eclipse.cdt.msvc.rc.inputType.1583135649" superClass="org.eclipse.cdt.msvc.rc.inputType"/>
+							</tool>
+							<tool id="org.eclipse.cdt.msvc.link.exe.debug.349953520" name="Linker (link)" superClass="org.eclipse.cdt.msvc.link.exe.debug">
+								<option id="org.eclipse.cdt.msvc.link.option.debug.1904074600" name="Generate Debug Info (/debug)" superClass="org.eclipse.cdt.msvc.link.option.debug" value="true" valueType="boolean"/>
+								<option defaultValue="true" id="org.eclipse.cdt.msvc.link.option.dll.242964372" name="Build a DLL" superClass="org.eclipse.cdt.msvc.link.option.dll" valueType="boolean"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="org.eclipse.cdt.msvc.link.option.libpath.694101341" name="Additional Libpath (/libpath)" superClass="org.eclipse.cdt.msvc.link.option.libpath" valueType="stringList"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="org.eclipse.cdt.msvc.link.option.libraries.712436035" name="Libraries" superClass="org.eclipse.cdt.msvc.link.option.libraries" valueType="libs">
+									<listOptionValue builtIn="false" value="User32.lib"/>
+								</option>
+								<inputType id="org.eclipse.cdt.msvc.link.inputType.172669792" superClass="org.eclipse.cdt.msvc.link.inputType"/>
+							</tool>
+							<tool id="org.eclipse.cdt.msvc.lib.382673197" name="Library Manager (lib)" superClass="org.eclipse.cdt.msvc.lib"/>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="org.eclipse.cdt.msvc.exe.release.704962534">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.eclipse.cdt.msvc.exe.release.704962534" moduleId="org.eclipse.cdt.core.settings" name="Release">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.PE64" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.VCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" description="" id="org.eclipse.cdt.msvc.exe.release.704962534" name="Release" parent="org.eclipse.cdt.msvc.exe.release">
+					<folderInfo id="org.eclipse.cdt.msvc.exe.release.704962534." name="/" resourcePath="">
+						<toolChain id="org.eclipse.cdt.msvc.toolchain.exe.release.16068187" name="Microsoft Visual C++" superClass="org.eclipse.cdt.msvc.toolchain.exe.release">
+							<targetPlatform id="org.eclipse.cdt.msvc.targetPlatform.exe.release.366932269" superClass="org.eclipse.cdt.msvc.targetPlatform.exe.release"/>
+							<builder buildPath="${workspace_loc:/hookDLL}/Release" id="org.eclipse.cdt.msvc.builder.966601318" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.msvc.builder"/>
+							<tool id="org.eclipse.cdt.msvc.cl.c.exe.release.876527890" name="C Compiler (cl)" superClass="org.eclipse.cdt.msvc.cl.c.exe.release">
+								<option id="org.eclipse.cdt.msvc.cl.option.optimization.1711398799" name="Optimization" superClass="org.eclipse.cdt.msvc.cl.option.optimization"/>
+								<option id="org.eclipse.cdt.msvc.cl.option.debugFormat.1246649285" name="Debug Information Format" superClass="org.eclipse.cdt.msvc.cl.option.debugFormat"/>
+								<inputType id="org.eclipse.cdt.msvc.cl.inputType.c.674397385" superClass="org.eclipse.cdt.msvc.cl.inputType.c"/>
+							</tool>
+							<tool id="org.eclipse.cdt.msvc.cl.exe.release.178175426" name="C++ Compiler (cl)" superClass="org.eclipse.cdt.msvc.cl.exe.release">
+								<option id="org.eclipse.cdt.msvc.cl.option.optimization.912042940" name="Optimization" superClass="org.eclipse.cdt.msvc.cl.option.optimization"/>
+								<option id="org.eclipse.cdt.msvc.cl.option.debugFormat.365717633" name="Debug Information Format" superClass="org.eclipse.cdt.msvc.cl.option.debugFormat"/>
+							</tool>
+							<tool id="org.eclipse.cdt.msvc.rc.exe.release.1479422433" name="Resource Compiler (rc)" superClass="org.eclipse.cdt.msvc.rc.exe.release">
+								<inputType id="org.eclipse.cdt.msvc.rc.inputType.1805472902" superClass="org.eclipse.cdt.msvc.rc.inputType"/>
+							</tool>
+							<tool id="org.eclipse.cdt.msvc.link.exe.release.798053374" name="Linker (link)" superClass="org.eclipse.cdt.msvc.link.exe.release">
+								<inputType id="org.eclipse.cdt.msvc.link.inputType.1903097288" superClass="org.eclipse.cdt.msvc.link.inputType"/>
+							</tool>
+							<tool id="org.eclipse.cdt.msvc.lib.1534929189" name="Library Manager (lib)" superClass="org.eclipse.cdt.msvc.lib"/>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="hookDLL.org.eclipse.cdt.msvc.projectType.exe.523829816" name="Executable" projectType="org.eclipse.cdt.msvc.projectType.exe"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="org.eclipse.cdt.msvc.exe.debug.1340068546;org.eclipse.cdt.msvc.exe.debug.1340068546.;org.eclipse.cdt.msvc.cl.c.exe.debug.860249890;org.eclipse.cdt.msvc.cl.inputType.c.1706575015">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.msw.build.clScannerInfo"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/hookDLL"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/hookDLL"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+</cproject>

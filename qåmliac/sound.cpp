@@ -3,21 +3,21 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
  * @file	: sound.cpp
  * @desc	: TODO
- * @author	: Johannah Granström
+ * @auþor	: Johannah Granström
  * @reqs	: SDL
  */
 
@@ -58,51 +58,51 @@ constexpr ub C1 = 0x18;
 constexpr ub CS1 = 0x19;
 constexpr ub D1 = 0x1a;
 constexpr ub DS1 = 0x1b;
-constexpr ub E1 = 0x1c; //E-sträng kontrabas
+constexpr ub E1 = 0x1c; //E-striŋ bass
 constexpr ub F1 = 0x1d;
 constexpr ub FS1 = 0x1e;
 constexpr ub G1 = 0x1f;
 constexpr ub GS1 = 0x20;
-constexpr ub A1 = 0x21; //A-sträng kontrabas
+constexpr ub A1 = 0x21; //A-striŋ bass
 constexpr ub AS1 = 0x22;
 constexpr ub B1 = 0x23;
 
-constexpr ub C2 = 0x24; //C-sträng cello
+constexpr ub C2 = 0x24; //C-striŋ cello
 constexpr ub CS2 = 0x25;
-constexpr ub D2 = 0x26; //D-sträng kontrabas
+constexpr ub D2 = 0x26; //D-striŋ bass
 constexpr ub DS2 = 0x27;
-constexpr ub E2 = 0x28; //Lägsta ton i Qåmlia CAPS
+constexpr ub E2 = 0x28; //Lowest note in Qåmlia CAPS
 constexpr ub F2 = 0x29;
 constexpr ub FS2 = 0x2a;
-constexpr ub G2 = 0x2b; //G-sträng cello, kontrabas
+constexpr ub G2 = 0x2b; //G-striŋ cello, bass
 constexpr ub GS2 = 0x2c;
 constexpr ub A2 = 0x2d;
 constexpr ub AS2 = 0x2e;
 constexpr ub B2 = 0x2f;
 
-constexpr ub C3 = 0x30; //C-sträng viola
+constexpr ub C3 = 0x30; //C-striŋ viola
 constexpr ub CS3 = 0x31;
-constexpr ub D3 = 0x32; //D-sträng cello
+constexpr ub D3 = 0x32; //D-striŋ cello
 constexpr ub DS3 = 0x33;
 constexpr ub E3 = 0x34;
 constexpr ub F3 = 0x35;
 constexpr ub FS3 = 0x36;
-constexpr ub G3 = 0x37; //G-sträng viola, violin, G
+constexpr ub G3 = 0x37; //G-striŋ viola, violin, G
 constexpr ub GS3 = 0x38;
-constexpr ub A3 = 0x39; //A-sträng cello
+constexpr ub A3 = 0x39; //A-striŋ cello
 constexpr ub AS3 = 0x3a;
 constexpr ub B3 = 0x3b;
 
 constexpr ub C4 = 0x3c;
 constexpr ub CS4 = 0x3d;
-constexpr ub D4 = 0x3e; //D-sträng viola, violin
+constexpr ub D4 = 0x3e; //D-striŋ viola, violin
 constexpr ub DS4 = 0x3f;
 constexpr ub E4 = 0x40;
 constexpr ub F4 = 0x41;
 constexpr ub FS4 = 0x42;
 constexpr ub G4 = 0x43;
 constexpr ub GS4 = 0x44;
-constexpr ub A4 = 0x45; //A-sträng viola, violin 440
+constexpr ub A4 = 0x45; //A-striŋ viola, violin 440
 constexpr ub AS4 = 0x46;
 constexpr ub B4 = 0x47;
 
@@ -110,10 +110,10 @@ constexpr ub C5 = 0x48;
 constexpr ub CS5 = 0x49;
 constexpr ub D5 = 0x4a;
 constexpr ub DS5 = 0x4b;
-constexpr ub E5 = 0x4c; //E-sträng violin
+constexpr ub E5 = 0x4c; //E-striŋ violin
 constexpr ub F5 = 0x4d;
 constexpr ub FS5 = 0x4e;
-constexpr ub G5 = 0x4f; //Högsta ton i Qåmlia
+constexpr ub G5 = 0x4f; //Highest note in Qåmlia
 constexpr ub GS5 = 0x50;
 constexpr ub A5 = 0x51;
 constexpr ub AS5 = 0x52;
@@ -145,7 +145,7 @@ constexpr ub A7 = 0x69;
 constexpr ub AS7 = 0x6a;
 constexpr ub B7 = 0x6b;
 
-constexpr ub C8 = 0x6c; //Högsta tonen på vanligt piano
+constexpr ub C8 = 0x6c; //Highest note on normal piano
 constexpr ub CS8 = 0x6d;
 constexpr ub D8 = 0x6e;
 constexpr ub DS8 = 0x6f;
@@ -166,12 +166,12 @@ constexpr ub TRIANGLE = 0x2;
 constexpr ub SAWTOOÞ = 0x3;
 
 struct Tone {
-	fl frequency;    // Frequency of the tone
+	fl frequency;    // Frequency of ðe tone
 	fl phase;        // Current phase
-	ub many;         // Whether the tone is playing
+	ub many;         // Wheðer ðe tone is playiŋ
 	bl active;
 	fl amplitude;    // Current amplitude
-	fl targetAmplitude; // Desired amplitude for smooth fade-in/out
+	fl targetAmplitude; // Desired amplitude for smooð fade-in/out
 };
 
 struct AudioData {
@@ -188,7 +188,7 @@ static ub freqToTone (df freq) {
 
 AudioData audioData;
 
-ui getPianoTone (us key) {
+ui getPianoTone (uš key) {
 	switch (key) {
 	case V1:
 		return (GS3);
@@ -232,7 +232,7 @@ ui getPianoTone (us key) {
 		return (C5);
 	case VÅ:
 		return (D5);
-	case VDIERESIS:
+	case VDIÆRESIS:
 		return (E5);
 //	case VRETURN:
 //		return (F5);
@@ -298,7 +298,7 @@ ui getPianoTone (us key) {
 	}
 }
 
-ui getKeyTone (us key) {
+ui getKeyTone (uš key) {
 	switch (key) {
 	//case VTAB: return (C4);
 	case VQ:
@@ -323,7 +323,7 @@ ui getKeyTone (us key) {
 		return (GS4);
 	case VÅ:
 		return (B4);
-	case VDIERESIS:
+	case VDIÆRESIS:
 		return (D5);
 	case VRETURN:
 		return (F5);
@@ -380,7 +380,7 @@ ui getKeyTone (us key) {
 		return (A4);
 	case VMINUS:
 		return (C5);
-	case VRSHIFT:
+	case VRŠIFT:
 		return (DS5);
 	case VEND:
 		return (FS5);
@@ -389,160 +389,159 @@ ui getKeyTone (us key) {
 	}
 }
 
-ui getKeyChord (us key) {
+ui getKeyChord (uš key) {
 	switch (key) {
 	case VESC:
-		return (F2 << BYTESHIFT1 | F3);
+		return (F2 << BYTEŠIFT1 | F3);
 	case VF1:
-		return (C3 << BYTESHIFT1 | C4);
+		return (C3 << BYTEŠIFT1 | C4);
 	case VF2:
-		return (G2 << BYTESHIFT1 | G3);
+		return (G2 << BYTEŠIFT1 | G3);
 	case VF3:
-		return (D3 << BYTESHIFT1 | D4);
+		return (D3 << BYTEŠIFT1 | D4);
 	case VF4:
-		return (A2 << BYTESHIFT1 | A3);
+		return (A2 << BYTEŠIFT1 | A3);
 	case VF5:
-		return (E2 << BYTESHIFT1 | E3);
+		return (E2 << BYTEŠIFT1 | E3);
 	case VF6:
-		return (B2 << BYTESHIFT1 | B3);
+		return (B2 << BYTEŠIFT1 | B3);
 	case VF7:
-		return (FS2 << BYTESHIFT1 | FS3);
+		return (FS2 << BYTEŠIFT1 | FS3);
 	case VF8:
-		return (CS3 << BYTESHIFT1 | CS4);
+		return (CS3 << BYTEŠIFT1 | CS4);
 	case VF9:
-		return (GS2 << BYTESHIFT1 | GS3);
+		return (GS2 << BYTEŠIFT1 | GS3);
 	case VF10:
-		return (DS3 << BYTESHIFT1 | DS4);
+		return (DS3 << BYTEŠIFT1 | DS4);
 	case VF11:
-		return (AS2 << BYTESHIFT1 | AS3);
+		return (AS2 << BYTEŠIFT1 | AS3);
 	case VF12:
-		return (F2 << BYTESHIFT1 | F3); //case VINS, VPRTSC
+		return (F2 << BYTEŠIFT1 | F3); //case VINS, VPRTSC
 	case VDEL:
-		return (C3 << BYTESHIFT1 | C4);
+		return (C3 << BYTEŠIFT1 | C4);
 
 	case VPARA:
-		return (CS3 << BYTESHIFT1 | CS4);
+		return (CS3 << BYTEŠIFT1 | CS4);
 	case V1:
-		return (GS2 << BYTESHIFT1 | GS3);
+		return (GS2 << BYTEŠIFT1 | GS3);
 	case V2:
-		return (DS3 << BYTESHIFT1 | DS4);
+		return (DS3 << BYTEŠIFT1 | DS4);
 	case V3:
-		return (AS2 << BYTESHIFT1 | AS3);
+		return (AS2 << BYTEŠIFT1 | AS3);
 	case V4:
-		return (F2 << BYTESHIFT1 | F3);
+		return (F2 << BYTEŠIFT1 | F3);
 	case V5:
-		return (C3 << BYTESHIFT1 | C4);
+		return (C3 << BYTEŠIFT1 | C4);
 	case V6:
-		return (G2 << BYTESHIFT1 | G3);
+		return (G2 << BYTEŠIFT1 | G3);
 	case V7:
-		return (D3 << BYTESHIFT1 | D4);
+		return (D3 << BYTEŠIFT1 | D4);
 	case V8:
-		return (A2 << BYTESHIFT1 | A3);
+		return (A2 << BYTEŠIFT1 | A3);
 	case V9:
-		return (E2 << BYTESHIFT1 | E3);
+		return (E2 << BYTEŠIFT1 | E3);
 	case V0:
-		return (B2 << BYTESHIFT1 | B3);
+		return (B2 << BYTEŠIFT1 | B3);
 	case VPLUS:
-		return (FS2 << BYTESHIFT1 | FS3);
+		return (FS2 << BYTEŠIFT1 | FS3);
 	case VACUTE:
-		return (CS3 << BYTESHIFT1 | CS4); //case VBS
+		return (CS3 << BYTEŠIFT1 | CS4); //case VBS
 	case VHOME:
-		return (GS2 << BYTESHIFT1 | GS3);
+		return (GS2 << BYTEŠIFT1 | GS3);
 
 	case VTAB:
-		return (CS4 << BYTESHIFT2 | F4 << BYTESHIFT1 | GS4);
+		return (CS4 << BYTEŠIFT2 | F4 << BYTEŠIFT1 | GS4);
 	case VQ:
-		return (GS3 << BYTESHIFT2 | C4 << BYTESHIFT1 | DS4);
+		return (GS3 << BYTEŠIFT2 | C4 << BYTEŠIFT1 | DS4);
 	case VW:
-		return (DS4 << BYTESHIFT2 | G4 << BYTESHIFT1 | AS4);
+		return (DS4 << BYTEŠIFT2 | G4 << BYTEŠIFT1 | AS4);
 	case VE:
-		return (AS3 << BYTESHIFT2 | D4 << BYTESHIFT1 | F4);
+		return (AS3 << BYTEŠIFT2 | D4 << BYTEŠIFT1 | F4);
 	case VR:
-		return (F3 << BYTESHIFT2 | A4 << BYTESHIFT1 | C4);
+		return (F3 << BYTEŠIFT2 | A4 << BYTEŠIFT1 | C4);
 	case VT:
-		return (C4 << BYTESHIFT2 | E4 << BYTESHIFT1 | G4);
+		return (C4 << BYTEŠIFT2 | E4 << BYTEŠIFT1 | G4);
 	case VY:
-		return (G3 << BYTESHIFT2 | B3 << BYTESHIFT1 | D4);
+		return (G3 << BYTEŠIFT2 | B3 << BYTEŠIFT1 | D4);
 	case VU:
-		return (D4 << BYTESHIFT2 | FS4 << BYTESHIFT1 | A4);
+		return (D4 << BYTEŠIFT2 | FS4 << BYTEŠIFT1 | A4);
 	case VI:
-		return (A3 << BYTESHIFT2 | CS4 << BYTESHIFT1 | E4);
+		return (A3 << BYTEŠIFT2 | CS4 << BYTEŠIFT1 | E4);
 	case VO:
-		return (E3 << BYTESHIFT2 | GS3 << BYTESHIFT1 | B4);
+		return (E3 << BYTEŠIFT2 | GS3 << BYTEŠIFT1 | B4);
 	case VP:
-		return (B3 << BYTESHIFT2 | DS4 << BYTESHIFT1 | FS4);
+		return (B3 << BYTEŠIFT2 | DS4 << BYTEŠIFT1 | FS4);
 	case VÅ:
-		return (FS3 << BYTESHIFT2 | AS3 << BYTESHIFT1 | CS4);
-	case VDIERESIS:
-		return (CS4 << BYTESHIFT2 | F4 << BYTESHIFT1 | GS4);
+		return (FS3 << BYTEŠIFT2 | AS3 << BYTEŠIFT1 | CS4);
+	case VDIÆRESIS:
+		return (CS4 << BYTEŠIFT2 | F4 << BYTEŠIFT1 | GS4);
 	case VPGUP:
-		return (GS3 << BYTESHIFT2 | C4 << BYTESHIFT1 | DS4);
+		return (GS3 << BYTEŠIFT2 | C4 << BYTEŠIFT1 | DS4);
 
 	case VCAPS:
-		return (CS4 << BYTESHIFT2 | E4 << BYTESHIFT1 | GS4);
+		return (CS4 << BYTEŠIFT2 | E4 << BYTEŠIFT1 | GS4);
 	case VA:
-		return (GS3 << BYTESHIFT2 | B4 << BYTESHIFT1 | DS4);
+		return (GS3 << BYTEŠIFT2 | B4 << BYTEŠIFT1 | DS4);
 	case VS:
-		return (DS4 << BYTESHIFT2 | FS4 << BYTESHIFT1 | AS4);
+		return (DS4 << BYTEŠIFT2 | FS4 << BYTEŠIFT1 | AS4);
 	case VD:
-		return (AS3 << BYTESHIFT2 | CS4 << BYTESHIFT1 | F4);
+		return (AS3 << BYTEŠIFT2 | CS4 << BYTEŠIFT1 | F4);
 	case VF:
-		return (F3 << BYTESHIFT2 | GS4 << BYTESHIFT1 | C4);
+		return (F3 << BYTEŠIFT2 | GS4 << BYTEŠIFT1 | C4);
 	case VG:
-		return (C4 << BYTESHIFT2 | DS4 << BYTESHIFT1 | G4);
+		return (C4 << BYTEŠIFT2 | DS4 << BYTEŠIFT1 | G4);
 	case VH:
-		return (G3 << BYTESHIFT2 | AS4 << BYTESHIFT1 | D4);
+		return (G3 << BYTEŠIFT2 | AS4 << BYTEŠIFT1 | D4);
 	case VJ:
-		return (D4 << BYTESHIFT2 | F4 << BYTESHIFT1 | A4);
+		return (D4 << BYTEŠIFT2 | F4 << BYTEŠIFT1 | A4);
 	case VK:
-		return (A3 << BYTESHIFT2 | C4 << BYTESHIFT1 | E4);
+		return (A3 << BYTEŠIFT2 | C4 << BYTEŠIFT1 | E4);
 	case VL:
-		return (E3 << BYTESHIFT2 | G4 << BYTESHIFT1 | B4);
+		return (E3 << BYTEŠIFT2 | G4 << BYTEŠIFT1 | B4);
 	case VÖ:
-		return (B3 << BYTESHIFT2 | D4 << BYTESHIFT1 | FS4);
+		return (B3 << BYTEŠIFT2 | D4 << BYTEŠIFT1 | FS4);
 	case VÄ:
-		return (FS3 << BYTESHIFT2 | A4 << BYTESHIFT1 | CS4);
+		return (FS3 << BYTEŠIFT2 | A4 << BYTEŠIFT1 | CS4);
 	case VAPOSTROPHE:
-		return (CS4 << BYTESHIFT2 | E4 << BYTESHIFT1 | GS4);
+		return (CS4 << BYTEŠIFT2 | E4 << BYTEŠIFT1 | GS4);
 	case VPGDN:
-		return (GS3 << BYTESHIFT2 | B4 << BYTESHIFT1 | DS4);
+		return (GS3 << BYTEŠIFT2 | B4 << BYTEŠIFT1 | DS4);
 
 	case VLESSER: // C#7
-		return (CS4 << BYTESHIFT3 | F4 << BYTESHIFT2 | GS4 << BYTESHIFT2 | B4);
+		return (CS4 << BYTEŠIFT3 | F4 << BYTEŠIFT2 | GS4 << BYTEŠIFT2 | B4);
 	case VZ: // G#7
-		return (GS3 << BYTESHIFT3 | C4 << BYTESHIFT2 | DS4 << BYTESHIFT1 | FS4);
+		return (GS3 << BYTEŠIFT3 | C4 << BYTEŠIFT2 | DS4 << BYTEŠIFT1 | FS4);
 	case VX: // D#7
-		return (DS4 << BYTESHIFT3 | G4 << BYTESHIFT2 | AS4 << BYTESHIFT1 | CS4);
+		return (DS4 << BYTEŠIFT3 | G4 << BYTEŠIFT2 | AS4 << BYTEŠIFT1 | CS4);
 	case VC: // A#7
-		return (AS3 << BYTESHIFT3 | D4 << BYTESHIFT2 | F4 << BYTESHIFT1 | GS4);
+		return (AS3 << BYTEŠIFT3 | D4 << BYTEŠIFT2 | F4 << BYTEŠIFT1 | GS4);
 	case VV: // F7
-		return (F3 << BYTESHIFT3 | A4 << BYTESHIFT2 | C4 << BYTESHIFT1 | DS4);
+		return (F3 << BYTEŠIFT3 | A4 << BYTEŠIFT2 | C4 << BYTEŠIFT1 | DS4);
 	case VB: // C7
-		return (C4 << BYTESHIFT3 | E4 << BYTESHIFT2 | G4 << BYTESHIFT1 | AS4);
+		return (C4 << BYTEŠIFT3 | E4 << BYTEŠIFT2 | G4 << BYTEŠIFT1 | AS4);
 	case VN: // G7
-		return (G3 << BYTESHIFT3 | B3 << BYTESHIFT2 | D4 << BYTESHIFT1 | F4);
+		return (G3 << BYTEŠIFT3 | B3 << BYTEŠIFT2 | D4 << BYTEŠIFT1 | F4);
 	case VM: // D7
-		return (D4 << BYTESHIFT3 | FS4 << BYTESHIFT2 | A4 << BYTESHIFT1 | C4);
+		return (D4 << BYTEŠIFT3 | FS4 << BYTEŠIFT2 | A4 << BYTEŠIFT1 | C4);
 	case VCOMMA: // A7
-		return (A3 << BYTESHIFT3 | CS4 << BYTESHIFT2 | E4 << BYTESHIFT1 | G4);
+		return (A3 << BYTEŠIFT3 | CS4 << BYTEŠIFT2 | E4 << BYTEŠIFT1 | G4);
 	case VPERIOD: // E7
-		return (E3 << BYTESHIFT3 | GS3 << BYTESHIFT2 | B4 << BYTESHIFT1 | D4);
+		return (E3 << BYTEŠIFT3 | GS3 << BYTEŠIFT2 | B4 << BYTEŠIFT1 | D4);
 	case VMINUS: // B7
-		return (B3 << BYTESHIFT3 | DS4 << BYTESHIFT2 | FS4 << BYTESHIFT1 | A4);
-	case VRSHIFT: // F#7
-		return (FS3 << BYTESHIFT3 | AS3 << BYTESHIFT2 | CS4 << BYTESHIFT1 | E4);
+		return (B3 << BYTEŠIFT3 | DS4 << BYTEŠIFT2 | FS4 << BYTEŠIFT1 | A4);
+	case VRŠIFT: // F#7
+		return (FS3 << BYTEŠIFT3 | AS3 << BYTEŠIFT2 | CS4 << BYTEŠIFT1 | E4);
 	case VRETURN: // C#7
-		return (CS4 << BYTESHIFT3 | F4 << BYTESHIFT2 | GS4 << BYTESHIFT1 | B4);
+		return (CS4 << BYTEŠIFT3 | F4 << BYTEŠIFT2 | GS4 << BYTEŠIFT1 | B4);
 	case VEND: // G#7
-		return (GS3 << BYTESHIFT3 | C4 << BYTESHIFT2 | DS4 << BYTESHIFT1 | FS4);
+		return (GS3 << BYTEŠIFT3 | C4 << BYTEŠIFT2 | DS4 << BYTEŠIFT1 | FS4);
 	default:
 		return (0);
 	}
 }
 
-static vo startTone (ub tone, ub wave) {
+static void startTone (ub tone, ub wave) {
 	if (tone == 0) return;
-	//printf((to_wstring(tone) + L" many: " + to_wstring(audioData.tones[tone - MIN_TONE].many)).c_str());
 	if (audioData.tones[wave][tone - MIN_TONE].active) {
 		++audioData.tones[wave][tone - MIN_TONE].many;
 		return;
@@ -553,24 +552,24 @@ static vo startTone (ub tone, ub wave) {
 	audioData.tones[wave][tone - MIN_TONE].targetAmplitude = AMP;
 }
 
-static vo stopTone (ub tone, ub wave) {
+static void stopTone (ub tone, ub wave) {
 	if (tone == 0) return;
 	if (--audioData.tones[wave][tone - MIN_TONE].many) return;
 	audioData.tones[wave][tone - MIN_TONE].amplitude = AMP;
 	audioData.tones[wave][tone - MIN_TONE].targetAmplitude = 0.0f;
 }
 
-vo playChord (ui one, bl down, ub wave) {
+void playChord (ui one, bl down, ub wave) {
 	if (down) return;
 	startTone(one & BYTEMASK, wave);
-	startTone((one >> BYTESHIFT1) & BYTEMASK, wave);
-	startTone((one >> BYTESHIFT2) & BYTEMASK, wave);
+	startTone((one >> BYTEŠIFT1) & BYTEMASK, wave);
+	startTone((one >> BYTEŠIFT2) & BYTEMASK, wave);
 }
 
-vo stopChord (ui one, ub wave) {
+void stopChord (ui one, ub wave) {
 	stopTone(one & BYTEMASK, wave);
-	stopTone((one >> BYTESHIFT1) & BYTEMASK, wave);
-	stopTone((one >> BYTESHIFT2) & BYTEMASK, wave);
+	stopTone((one >> BYTEŠIFT1) & BYTEMASK, wave);
+	stopTone((one >> BYTEŠIFT2) & BYTEMASK, wave);
 }
 
 df getWave (ub type, fl phase) {
@@ -588,7 +587,7 @@ df getWave (ub type, fl phase) {
 	}
 }
 
-static vo audioCallback (vo *userData, ub *stream, si len) {
+static void audioCallback (void *userData, ub *stream, si len) {
 	AudioData *audioData = static_cast<AudioData*>(userData);
 	fl *output = (fl*) (stream);
 	ui samples = len / sizeof(fl);
@@ -603,7 +602,7 @@ static vo audioCallback (vo *userData, ub *stream, si len) {
 
 			Tone *tone = &audioData->tones[wave][t];
 			for (ui i = 0; i < samples; i++) {
-				us ton = freqToTone(tone->frequency);
+				uš ton = freqToTone(tone->frequency);
 				fl fade = ton > 70 ? 0.001f : ton > 60 ? 0.0005f : ton > 50 ? 0.0002f : ton > 40 ? 0.00005f : 0.00002f;		// : 0.0005f;
 				if (tone->amplitude < tone->targetAmplitude) {
 					tone->amplitude += fade;
@@ -640,7 +639,7 @@ vo destroySound () {
 	SDL_CloseAudio(); // Clean up
 }
 
-bool playOnDev (cca dev, us key, bool llAlreadyDown, bool start) {
+bool playOnDev (čca dev, uš key, bool llAlreadyDown, bool start) {
 	sl tone = -1;
 	Ins ins;
 	if (aa.find(dev) != aa.end()) ins = aa.at(dev);
@@ -666,7 +665,7 @@ bool playOnDev (cca dev, us key, bool llAlreadyDown, bool start) {
 
 vo startSound (wcr arg) {
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
-		printf("Failed to initialize SDL: %s\n", SDL_GetError());
+		printf("Failed to iniṫalise SDL: %s\n", SDL_GetError());
 		return;
 	}
 
@@ -688,10 +687,10 @@ vo startSound (wcr arg) {
 				st inss = *(++s);
 				if (inss.compare("acc") == 0) ins.ins = 0;
 				else if (inss.compare("bas") == 0) ins.ins = 1;
-				if (inss.compare("pia") == 0) ins.ins = 2;
+				else if (inss.compare("pia") == 0) ins.ins = 2;
 			}
 		}
-		printf("Wave: %d, ins %d\n", ins.wave, ins.ins);
+//		printf("Wave: %d, ins %d\n", ins.wave, ins.ins);
 		aa.insert(std::pair<st, Ins>(dev, ins));
 	}
 

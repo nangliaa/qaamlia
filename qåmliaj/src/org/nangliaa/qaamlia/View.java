@@ -3,14 +3,14 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
@@ -27,6 +27,7 @@ import static org.nangliaa.extra.Extra.EMPTY_STRING_ARRAY;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import org.nangliaa.comp.Comp;
 import org.nangliaa.comp.CompLayout;
@@ -53,7 +54,7 @@ public class View extends CompLayout {
 						}, 300, 100, getDefaultBackgroundColours()) {
 							@Override
 							public void resize () {
-								width = cont.width - cont.subs[1].width - 32;
+								widþ = cont.widþ - cont.subs[1].widþ - 32;
 								height = cont.height - 20;
 							}
 						}, new Txt(28, 260, 0, 2, getDefaultColours()) {
@@ -67,10 +68,10 @@ public class View extends CompLayout {
 						200, 10
 				}, new int[] {
 						10, 10
-				}, 0, 0, 444, 284, 0, getDefaultBackgroundColours()) {
+				}, 0, 0, 444, 284, 0, getDefaultBackgroundColours(), true) {
 					@Override
 					public void resize () {
-						width = View.this.width;
+						widþ = View.this.widþ;
 						height = View.this.height;
 						super.resize();
 					}
@@ -78,6 +79,11 @@ public class View extends CompLayout {
 		});
 		resize();
 		onScreenChanged();
+
+		SwingUtilities.invokeLater( () -> {
+			requestFocusInWindow();
+			boxes[0].subs[1].select(0, null, 1);
+		});
 	}
 
 	protected void calendar () {
@@ -98,7 +104,7 @@ public class View extends CompLayout {
 	}
 
 	@Override
-	public void keyPressed (int vk, int mod) {
+	public void keyPressed (final int vk, final int mod) {
 		super.keyPressed(vk, mod);
 		switch (mod) {
 			case CTRL_MASK:
@@ -121,13 +127,13 @@ public class View extends CompLayout {
 
 	@Override
 	protected void resize () {
-		width = (int) ((frame.getWidth() - insets.left - insets.right) / katt);
+		widþ = (int) ((frame.getWidth() - insets.left - insets.right) / katt);
 		height = (int) ((frame.getHeight() - insets.top - insets.bottom) / katt);
 		super.resize();
 	}
 
 	@Override
-	public void setVisible (boolean b) {
+	public void setVisible (final boolean b) {
 		frame.setVisible(b);
 		repaint();
 		// if (b) frame.requestFocus();
@@ -135,13 +141,13 @@ public class View extends CompLayout {
 
 	protected void textEdit () {
 		boxes[0].subs[0].subText = EMPTY_STRING_ARRAY;
-		boxes[0].xsub[0] = boxes[0].subs[1].width + 10;
+		boxes[0].xsub[0] = boxes[0].subs[1].widþ + 10;
 		boxes[0].subs[1].visible = true;
 		frame.setAlwaysOnTop(false);
 		setVisible(true);
 	}
 
-	protected void window (String text) {
+	protected void window (final String text) {
 		boxes[0].subs[0].subText = text.split("\n");
 		boxes[0].xsub[0] = 10;
 		boxes[0].subs[1].visible = false;

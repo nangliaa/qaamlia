@@ -3,31 +3,31 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
  * @file	: loc.cpp
- * @desc	: Contains localisation of time terms.
- * @author	: Johannah Granström
+ * @desc	: Contains localisaṫon of time terms.
+ * @auþor	: Johannah Granström
  * @reqs	: NONE
  */
 
 #include "extra.h"
 
-constexpr us sv = 1;
-constexpr us enð = 2;
-constexpr us enth = 3;
+constexpr uš sv = 1;
+constexpr uš enð = 2;
+constexpr uš enth = 3;
 
-us locale = sv; //sv-SE
+uš locale = sv; //sv-SE
 
 static wsc weekDays[][7] = { { L"Måndag", L"Tisdag", L"Onsdag", L"Torsdag", L"Fredag", L"Lördag", L"Söndag" }, // nagolima
 		{ L"Måndag", L"Tisdag", L"Onsdag", L"Torsdag", L"Fredag", L"Lördag", L"Söndag" }, // sv
@@ -43,7 +43,7 @@ static wsc shortWeekDays[][7] = { { L"Mån", L"Tis", L"Ons", L"Tor", L"Fre", L"L
 
 static wsc monþs[][12] = { { L"J", L"F", L"M", L"A", L"M", L"J", L"J", L"A", L"S", L"O", L"N", L"D" }, // nagolima
 		{ L"Januari", L"Februari", L"Mars", L"April", L"Maj", L"Juni", L"Juli", L"Augusti", L"September", L"Oktober", L"November", L"December" }, // sv
-		{ L"January", L"February", L"March", L"April", L"May", L"June", L"July", L"August", L"September", L"October", L"November", L"December" }, // enþ
+		{ L"January", L"February", L"Mąč", L"April", L"May", L"June", L"July", L"August", L"September", L"October", L"November", L"December" }, // enþ
 		{ L"January", L"February", L"March", L"April", L"May", L"June", L"July", L"August", L"September", L"October", L"November", L"December" }, // enth
 		};
 
@@ -53,18 +53,18 @@ static wsc shortMonþs[][12] = { { L"J", L"F", L"M", L"A", L"M", L"J", L"J", L"A
 		{ L"Jan", L"Feb", L"Mar", L"Apr", L"Maj", L"Jun", L"Jul", L"Aug", L"Sep", L"Okt", L"Nov", L"Dec" }, // enth
 		};
 
-wsc weekdayName (us day) {
+wsc weekdayName (uš day) {
 	return (weekDays[locale][day]);
 }
 
-wsc weekdayShortName (us day) {
+wsc weekdayShortName (uš day) {
 	return (shortWeekDays[locale][day]);
 }
 
-wsc monþName (us monþ) {
+wsc monþName (uš monþ) {
 	return (monþs[locale][monþ]);
 }
 
-wsc monþShortName (us monþ) {
+wsc monþShortName (uš monþ) {
 	return (shortMonþs[locale][monþ]);
 }

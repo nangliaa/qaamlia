@@ -3,14 +3,14 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
@@ -24,14 +24,8 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import org.nangliaa.extra.Img;
 
@@ -39,12 +33,12 @@ public class Special {
 	private static class ImageSelection implements Transferable {
 		private final BufferedImage image;
 
-		public ImageSelection (BufferedImage image) {
+		public ImageSelection (final BufferedImage image) {
 			this.image = image;
 		}
 
 		@Override
-		public Object getTransferData (DataFlavor flavour) throws UnsupportedFlavorException {
+		public Object getTransferData (final DataFlavor flavour) throws UnsupportedFlavorException {
 			if (!isDataFlavorSupported(flavour)) throw new UnsupportedFlavorException(flavour);
 			return image;
 		}
@@ -57,29 +51,12 @@ public class Special {
 		}
 
 		@Override
-		public boolean isDataFlavorSupported (DataFlavor flavour) {
+		public boolean isDataFlavorSupported (final DataFlavor flavour) {
 			return DataFlavor.imageFlavor.equals(flavour);
 		}
 	}
 
-	public static byte[] getAppData (String paþ) {
-		try {
-			return Files.readAllBytes(Paths.get(getAppDataPaþ() + File.separatorChar + paþ));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public static String getAppDataPaþ () {
-		final String os = System.getProperty("os.name").toLowerCase();
-		if (os.contains("win")) {
-			String appData = System.getenv("APPDATA");
-			return appData + "\\Naŋliå";
-		}
-		if (os.contains("mac")) return System.getProperty("user.home") + "/Library/Application Support/Naŋliå";
-		return System.getProperty("user.home") + "/.local/share/Naŋliå";
-	}
+	public static char fileSeparator = File.separatorChar;
 
 	public static Img getClipboardImg () {
 		try {
@@ -95,7 +72,7 @@ public class Special {
 	 *
 	 * @return
 	 */
-	public static String getClipboardString () {
+	public static String getClipboardStriŋ () {
 		try {
 			return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
 		} catch (HeadlessException | UnsupportedFlavorException | IOException e) {
@@ -107,70 +84,19 @@ public class Special {
 
 	public static boolean isClipboardImg () { return Toolkit.getDefaultToolkit().getSystemClipboard().isDataFlavorAvailable(DataFlavor.imageFlavor); }
 
-	public static boolean isClipboardString () { return Toolkit.getDefaultToolkit().getSystemClipboard().isDataFlavorAvailable(DataFlavor.stringFlavor); }
+	public static boolean isClipboardStriŋ () { return Toolkit.getDefaultToolkit().getSystemClipboard().isDataFlavorAvailable(DataFlavor.stringFlavor); }
 
-	public static byte[] readRes (String file) {
-		ClassLoader classLoader = Special.class.getClassLoader();
-		InputStream inputStream = classLoader.getResourceAsStream(file);
-
-		if (inputStream == null) throw new IllegalArgumentException("File " + file + " not found!");
-		try {
-			return inputStream.readAllBytes();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public static InputStream resFileStream (String file) {
-		ClassLoader classLoader = Special.class.getClassLoader();
-		InputStream inputStream = classLoader.getResourceAsStream(file);
-
-		if (inputStream == null) throw new IllegalArgumentException("File " + file + " not found!");
-		return inputStream;
-	}
-
-	public static void setClipboard (Img img) {
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	public static void setClipboard (final Img img) {
+		final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(new ImageSelection(ImgAWT.getBufferedImage(img)), null);
 	}
 
-	public static void setClipboard (String string) {
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		clipboard.setContents(new StringSelection(string), null);
+	public static void setClipboard (final String str) {
+		final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(new StringSelection(str), null);
 	}
 
-	public static String[] split (String str, String delimiter, int limit) {
+	public static String[] split (final String str, final String delimiter, final int limit) {
 		return str.split(delimiter, limit);
-	}
-
-	/**
-	 * Writes binary to the resources folder.
-	 *
-	 * @param file
-	 * @param msg
-	 */
-	public static void writeRes (String file, byte[] msg) {
-		try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("resources\\" + file));) {
-			outputStream.write(msg);
-			outputStream.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Writes to the resources folder.
-	 *
-	 * @param file
-	 * @param msg
-	 */
-	public static void writeRes (String file, String msg) {
-		try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("resources\\" + file));) {
-			outputStream.write(msg.getBytes(StandardCharsets.UTF_8));
-			outputStream.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

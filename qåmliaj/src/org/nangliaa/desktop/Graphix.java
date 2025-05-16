@@ -3,14 +3,14 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
@@ -37,12 +37,12 @@ public class Graphix {
 	public static final Font FONT2 = createFont("židlia.ttf", 32f);
 	public static final Font FONT = createFont("židlia.ttf", 16f);
 
-	public static Font createFont (String a, float size) {
+	public static Font createFont (final String a, final float size) {
 		Font f = null;
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		try {
-			f = Font.createFont(Font.TRUETYPE_FONT, Special.resFileStream(a)).deriveFont(size);
-			Map attributes = f.getAttributes();
+			f = Font.createFont(Font.TRUETYPE_FONT, FileIO.resFileStream(a)).deriveFont(size);
+			final Map attributes = f.getAttributes();
 			attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
 			f = f.deriveFont(attributes);
 		} catch (FontFormatException | IOException e2) {}
@@ -50,78 +50,78 @@ public class Graphix {
 		return f;
 	}
 
-	public static int[] resizeImageNearestNeighbor (int[] pixels, int imgWidth, int newWidth) {
+	public static int[] resizeImageNearestNeighbor (final int[] pixels, final int imgWidþ, final int newWidþ) {
 		if (pixels.length == 0) return pixels;
-		int[] resizedPixels = new int[newWidth * newWidth];
+		final int[] resizedPixels = new int[newWidþ * newWidþ];
 
-		for (int y = 0; y < newWidth; y++)
-			for (int x = 0; x < newWidth; x++) {
-				// Calculate the nearest x, y in the original image
-				int nearestX = (int) (x / (double) newWidth * imgWidth);
-				int nearestY = (int) (y / (double) newWidth * (pixels.length / imgWidth));
+		for (int y = 0; y < newWidþ; y++)
+			for (int x = 0; x < newWidþ; x++) {
+				// Calculate ðe nearest x, y in ðe original image
+				final int nearestX = (int) (x / (double) newWidþ * imgWidþ);
+				final int nearestY = (int) (y / (double) newWidþ * (pixels.length / imgWidþ));
 
-				// Get the pixel from the original image
-				int pixel = pixels[nearestY * imgWidth + nearestX];
+				// Get ðe pixel from ðe original image
+				final int pixel = pixels[nearestY * imgWidþ + nearestX];
 
-				// Set the pixel in the resized image
-				resizedPixels[y * newWidth + x] = pixel;
+				// Set ðe pixel in ðe resized image
+				resizedPixels[y * newWidþ + x] = pixel;
 			}
 		return resizedPixels;
 	}
 
 	Graphics2D core;
 
-	public Graphix (Graphics core) {
+	public Graphix (final Graphics core) {
 		this.core = (Graphics2D) core;
 		core.setFont(Graphix.FONT);
 	}
 
-	public void arc (int x, int y, int width, int height, int startAngle, int arcAngle, int colour) {
+	public void arc (final int x, final int y, final int widþ, final int height, final int startAngle, final int arcAngle, final int colour) {
 		setColour(colour);
-		core.fillArc(x, y, width, height, startAngle, arcAngle);
+		core.fillArc(x, y, widþ, height, startAngle, arcAngle);
 	}
 
 	public void dispose () {
 		core.dispose();
 	}
 
-	public void drawImage (BufferedImage i, int x, int y) {
+	public void drawImage (final BufferedImage i, final int x, final int y) {
 		core.drawImage(i, x, y, null);
 	}
 
-	public void drawImage (BufferedImage img, int x, int y, int width, int height) {
-		core.drawImage(img, x, y, width, height, null);
+	public void drawImage (final BufferedImage img, final int x, final int y, final int widþ, final int height) {
+		core.drawImage(img, x, y, widþ, height, null);
 	}
 
-	public void drawImage (Img img, int x, int y) {
-		drawImage(img, x, y, img.getWidth(), img.getHeight());
+	public void drawImage (final Img img, final int x, final int y) {
+		drawImage(img, x, y, img.getWidþ(), img.getHeight());
 	}
 
-	public void drawImage (Img img, int x, int y, int width, int height) {
-		drawImage(new ImgAWT(img), x, y, width, height); // TODO
+	public void drawImage (final Img img, final int x, final int y, final int widþ, final int height) {
+		drawImage(new ImgAWT(img), x, y, widþ, height); // TODO
 	}
 
-	public void drawLine (int x1, int y1, int x2, int y2) {
+	public void drawLine (final int x1, final int y1, final int x2, final int y2) {
 		core.drawLine(x1, y1, x2, y2);
 	}
 
-	public void drawLine (int x1, int y1, int x2, int y2, int textColour) {
+	public void drawLine (final int x1, final int y1, final int x2, final int y2, final int textColour) {
 		setColour(textColour);
 		core.drawLine(x1, y1, x2, y2);
 	}
 
-	public void drawOval (int x, int y, int width, int height, int teamColour) {
+	public void drawOval (final int x, final int y, final int widþ, final int height, final int teamColour) {
 		setColour(teamColour);
-		core.drawOval(x, y, width, height);
+		core.drawOval(x, y, widþ, height);
 	}
 
-	public void drawPolygon (Polygon polygon) {
+	public void drawPolygon (final Polygon polygon) {
 		core.drawPolygon(polygon);
 	}
 
-	public void drawRect (int x, int y, int width, int height, int round, int colour) {
+	public void drawRect (final int x, final int y, final int widþ, final int height, final int round, final int colour) {
 		setColour(colour);
-		core.drawRoundRect(x, y, width, height, round, round);
+		core.drawRoundRect(x, y, widþ, height, round, round);
 	}
 
 	/**
@@ -129,56 +129,55 @@ public class Graphix {
 	 * @param object
 	 * @param x
 	 * @param y
-	 * @param imgWidth
-	 * @param scale    2 ^ scale
+	 * @param imgWidþ
+	 * @param scale   2 ^ scale
 	 */
-
-	public void drawScaledImage (int[] object, int x, int y, int imgWidth, double scale) {
-		int scaled = (int) (imgWidth * scale);
-		ImgAWT imgAWT = new ImgAWT(scaled, scaled); // TODO
+	public void drawScaledImage (final int[] object, final int x, final int y, final int imgWidþ, final double scale) {
+		final int scaled = (int) (imgWidþ * scale);
+		final ImgAWT imgAWT = new ImgAWT(scaled, scaled); // TODO
 		for (int i = 0; i < scaled * scaled; i++)
 			imgAWT.setRGB(i / scaled, i % scaled, object[i / (int) (scale * scale)]);
 		drawImage(imgAWT, x, y);
 	}
 
-	public void drawSERect (int markerX, int markerY, int markerWidth, int markerHeight, int i, int textColour) {
+	public void drawSERect (final int markerX, final int markerY, final int markerWidþ, final int markerHeight, final int i, final int textColour) {
 		setColour(textColour);
-		drawLine(markerX + markerWidth, markerY, markerX + markerWidth, markerY + markerHeight);
-		drawLine(markerX, markerY + markerHeight, markerX + markerWidth, markerY + markerHeight);
+		drawLine(markerX + markerWidþ, markerY, markerX + markerWidþ, markerY + markerHeight);
+		drawLine(markerX, markerY + markerHeight, markerX + markerWidþ, markerY + markerHeight);
 	}
 
-	public void drawString (String string, int i, int j) {
-		core.drawString(string, i, j + FONT_HEIGHT);
+	public void drawString (final String striŋ, final int i, final int j) {
+		core.drawString(striŋ, i, j + FONT_HEIGHT);
 	}
 
-	public void frame (int x, int y, int width, int height, int round, int number, int colour, boolean small) {
+	public void frame (final int x, final int y, final int widþ, final int height, final int round, final int number, final int colour, final boolean small) {
 		if (colour == Colour.NULL) return;
 		setColour(colour);
 		for (int i = 0; i < number; i++)
-			core.drawRoundRect(x + 2 * i, y + 2 * i, width - 4 * i, height - 4 * i, round - (small ? 4 : 2) * i, round - (small ? 4 : 2) * i);
+			core.drawRoundRect(x + 2 * i, y + 2 * i, widþ - 4 * i, height - 4 * i, round - (small ? 4 : 2) * i, round - (small ? 4 : 2) * i);
 	}
 
-	public void oval (int x, int y, int width, int height, int teamColour) {
+	public void oval (final int x, final int y, final int widþ, final int height, final int teamColour) {
 		setColour(teamColour);
-		core.fillOval(x, y, width, height);
+		core.fillOval(x, y, widþ, height);
 	}
 
-	public void rect (int x, int y, int width, int height, int colour) {
+	public void rect (final int x, final int y, final int widþ, final int height, final int colour) {
 		setColour(colour);
-		core.fillRect(x, y, width, height);
+		core.fillRect(x, y, widþ, height);
 	}
 
-	public void rect (int x, int y, int width, int height, int round, int colour) {
+	public void rect (final int x, final int y, final int widþ, final int height, final int round, final int colour) {
 		setColour(colour);
-		core.fillRoundRect(x, y, width, height, round, round);
+		core.fillRoundRect(x, y, widþ, height, round, round);
 	}
 
-	public void setColour (int colour) {
+	public void setColour (final int colour) {
 		// if (colour == null) colour = Colour.TRANS;
 		core.setColor(new Color(colour));
 	}
 
-	public void setFont (Font font) {
+	public void setFont (final Font font) {
 		core.setFont(font);
 	}
 }

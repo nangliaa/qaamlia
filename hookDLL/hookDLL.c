@@ -3,15 +3,15 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
-	Ðis program is distributed in ðe hope ðat it will be useful, but WIÞOUT ANY WARRANTY;
-	wiþout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
-	aloŋ wiþ ðis program. If not, see <https://www.gnu.org/licenses/>.
+	You šould have received a copy of ðe GNU General Public License
+	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
 /**
@@ -32,7 +32,7 @@ HWND hwndServer = NULL;
 HINSTANCE instanceHandle;
 HHOOK hookHandle;
 
-BOOL APIENTRY DllMain (HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
+BOOL APIENTRY DllMain (HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
 	switch (ul_reason_for_call) {
 	case DLL_PROCESS_ATTACH:
 		instanceHandle = hModule;
@@ -48,18 +48,18 @@ BOOL APIENTRY DllMain (HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 
 static LRESULT CALLBACK KeyboardProc (int code, WPARAM wParam, LPARAM lParam) {
 	if (code < 0) {
-		return CallNextHookEx (hookHandle, code, wParam, lParam);
+		return (CallNextHookEx(hookHandle, code, wParam, lParam));
 	}
 
-	if (SendMessage (hwndServer, WM_HOOK, wParam, lParam)) {
-		return 1;
+	if (SendMessage(hwndServer, WM_HOOK, wParam, lParam)) {
+		return (1);
 	}
 
-	return CallNextHookEx (hookHandle, code, wParam, lParam);
+	return (CallNextHookEx(hookHandle, code, wParam, lParam));
 }
 
-BOOL installHookDLL (HWND hwndParent) {
-	hookHandle = SetWindowsHookEx (WH_KEYBOARD, (HOOKPROC)KeyboardProc, instanceHandle, 0);
+HOOKDLL_API BOOL installHookDLL (HWND hwndParent) {
+	hookHandle = SetWindowsHookEx(WH_KEYBOARD, (HOOKPROC) KeyboardProc, instanceHandle, 0);
 	if (hookHandle == NULL) {
 		return (FALSE);
 	}
@@ -67,12 +67,12 @@ BOOL installHookDLL (HWND hwndParent) {
 	return (TRUE);
 }
 
-BOOL uninstallHookDLL () {
+HOOKDLL_API BOOL uninstallHookDLL () {
 	if (hookHandle == NULL) {
 		return (TRUE);
 	}
-	if (!UnhookWindowsHookEx (hookHandle)) {
-		DWORD error = GetLastError ();
+	if (!UnhookWindowsHookEx(hookHandle)) {
+		DWORD error = GetLastError();
 		if (error != ERROR_INVALID_HOOK_HANDLE) {
 			return (FALSE);
 		}

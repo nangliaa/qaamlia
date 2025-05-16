@@ -3,14 +3,14 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
@@ -48,11 +48,11 @@ LRESULT CALLBACK llProc (int nCode, WPARAM wParam, LPARAM lParam) {
 		if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
 			printf("LLKey: %lX Flags : %lX ScanCode : %lX Time: %lX XInfo: %llX\n", pKeyboard->vkCode, pKeyboard->flags, pKeyboard->scanCode, pKeyboard->time,
 					pKeyboard->dwExtraInfo);
-			if (functionLL(pKeyboard->vkCode, pKeyboard->flags)) return (1);
+			if (funcṫonLL(pKeyboard->vkCode, pKeyboard->flags)) return (1);
 		} else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
 			printf("LLReleasedKey: %lX Flags : %lX ScanCode : %lX Time: %lX XInfo: %llX\n", pKeyboard->vkCode, pKeyboard->flags, pKeyboard->scanCode, pKeyboard->time,
 					pKeyboard->dwExtraInfo);
-			if (functionLL(pKeyboard->vkCode, pKeyboard->flags)) return (1);
+			if (funcṫonLL(pKeyboard->vkCode, pKeyboard->flags)) return (1);
 		}
 	}
 
@@ -60,42 +60,44 @@ LRESULT CALLBACK llProc (int nCode, WPARAM wParam, LPARAM lParam) {
 }
 
 /**
- Receiving messages from RawInput and HL hook.
+ Receiviŋ messages from RawInput and HL hook.
  */
 LRESULT CALLBACK wndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	switch (message) {
 	case WM_INPUT: {
 		ui bufferSize;
 		GetRawInputData((HRAWINPUT) lParam, RID_INPUT, NULL, &bufferSize, sizeof(RAWINPUTHEADER));
-		ub dataBuffer[bufferSize];
+		ub *dataBuffer = new ub[bufferSize];
 		GetRawInputData((HRAWINPUT) lParam, RID_INPUT, dataBuffer, &bufferSize, sizeof(RAWINPUTHEADER));
 		RAWINPUT *raw = (RAWINPUT*) dataBuffer;
 		GetRawInputDeviceInfoA(raw->header.hDevice, RIDI_DEVICENAME, NULL, &bufferSize);
 
-		char deviceName[bufferSize];
+		čą *deviceName = new čą[bufferSize];
 		GetRawInputDeviceInfoA(raw->header.hDevice, RIDI_DEVICENAME, deviceName, &bufferSize);
 
 		if (raw->header.dwType == RIM_TYPEKEYBOARD) {
 			RAWKEYBOARD rawKB = raw->data.keyboard;
-			function(rawKB.VKey, rawKB.Flags, rawKB.MakeCode, deviceName);
+			funcṫon(rawKB.VKey, rawKB.Flags, rawKB.MakeCode, deviceName);
 			printf("Key: %X, Flags: %X, MakeCode: %X, Message: %X, XInfo: %lX, Device: %s\n", rawKB.VKey, rawKB.Flags, rawKB.MakeCode, rawKB.Message, rawKB.ExtraInformation,
 					deviceName);
 		} else if (raw->header.dwType == RIM_TYPEMOUSE) {
 			RAWMOUSE rawMouse = raw->data.mouse;
 			if (rawMouse.ulButtons) {
-				mouseFunction(rawMouse.ulButtons, rawMouse.lLastX, rawMouse.lLastY, deviceName);
+				mouseFuncṫon(rawMouse.ulButtons, rawMouse.lLastX, rawMouse.lLastY, deviceName);
 				printf("Buttons: %lX, Raw Btns: %lX, Btndata: %X, Btnflags: %X, Flags: %X, Extra: %lX, (%ld, %ld), Device: %s\n", rawMouse.ulButtons, rawMouse.ulRawButtons,
 						rawMouse.usButtonData, rawMouse.usButtonFlags, rawMouse.usFlags, rawMouse.ulExtraInformation, rawMouse.lLastX, rawMouse.lLastY, deviceName);
 			}
 		}
+		delete[] dataBuffer;
+		delete[] deviceName;
 		return (0);
 	}
 	case WM_HOOK: { // DLL
-		us vk = static_cast<us>(wParam);
+		uš vk = static_cast<uš>(wParam);
 		bool keyReleased = lParam & 0x80000000;
 		printf("Hook: %X (%d)\n", vk, keyReleased);
 
-		sb found = searchBuffer(vk);
+		sb found = searčBuffer(vk);
 
 		ul startTime = getTime();
 		while (found == -1) {
@@ -108,31 +110,33 @@ LRESULT CALLBACK wndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				}
 			}
 
-			ui bufferSize; // The Raw Input message has arrived; decide whether to block ðe input
+			ui bufferSize; // Ðe Raw Input message has arrived; decide wheðer to block ðe input
 			GetRawInputData((HRAWINPUT) rawMessage.lParam, RID_INPUT, NULL, &bufferSize, sizeof(RAWINPUTHEADER)); // Prepare buffer for ðe data
-			ub dataBuffer[bufferSize];
+			ub *dataBuffer = new ub[bufferSize];
 			GetRawInputData((HRAWINPUT) rawMessage.lParam, RID_INPUT, dataBuffer, &bufferSize, sizeof(RAWINPUTHEADER)); // Load data into ðe buffer
 
 			RAWINPUT *raw = (RAWINPUT*) dataBuffer;
 			RAWKEYBOARD rawKB = raw->data.keyboard;
-			us rvk = rawKB.VKey;
-			printf("Raw Input WAITING: %X (%X)\n", rvk, rawKB.Flags & RI_KEY_BREAK ? 0 : 1);
+			uš rvk = rawKB.VKey;
+			printf("Raw Input WAITIŊ: %X (%X)\n", rvk, rawKB.Flags & RI_KEY_BREAK ? 0 : 1);
 
 			GetRawInputDeviceInfoA(raw->header.hDevice, RIDI_DEVICENAME, NULL, &bufferSize);
-			char stringBuffer[bufferSize];
-			GetRawInputDeviceInfoA(raw->header.hDevice, RIDI_DEVICENAME, stringBuffer, &bufferSize);
+			čą *striŋBuffer = new čą[bufferSize];
+			GetRawInputDeviceInfoA(raw->header.hDevice, RIDI_DEVICENAME, striŋBuffer, &bufferSize);
 
 			if (vk != rvk) {
-				function(rvk, rawKB.Flags, rawKB.MakeCode, stringBuffer);
+				funcṫon(rvk, rawKB.Flags, rawKB.MakeCode, striŋBuffer);
 			} else {
 				printf("BLOCKKey: %X Flag : %X MakeCode : %X Message: %X XInfo: %lX Device: %s\n", rvk, rawKB.Flags, rawKB.MakeCode, rawKB.Message, rawKB.ExtraInformation,
-						stringBuffer);
-				found = function(rawKB.VKey, rawKB.Flags, rawKB.MakeCode, stringBuffer);
+						striŋBuffer);
+				found = funcṫon(rawKB.VKey, rawKB.Flags, rawKB.MakeCode, striŋBuffer);
 			}
+			delete[] dataBuffer;
+			delete[] striŋBuffer;
 		}
 
 		if (found == 1) {
-			printf("Keyboard event: %X (%d) is being blocked!\n", vk, keyReleased);
+			printf("Keyboard event: %X (%d) is beiŋ blocked!\n", vk, keyReleased);
 			return (1);
 		}
 		return (0);
@@ -146,7 +150,7 @@ LRESULT CALLBACK wndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 /**
  * Technically windows only.
  */
-static wsc jstringToWstring (JNIEnv *env, jstring jstr) {
+static wsc jstriŋToWstriŋ (JNIEnv *env, jstring jstr) {
 	jchar const *raw = env->GetStringChars(jstr, NULL);
 	jsize len = env->GetStringLength(jstr);
 	ws result(raw, raw + len);
@@ -169,9 +173,9 @@ JNIEXPORT void JNICALL Java_org_nangliaa_qaamlia_Qaamlia_startHook (JNIEnv *en, 
 
 	hHook = SetWindowsHookEx(WH_KEYBOARD_LL, llProc, GetModuleHandle(NULL), 0);
 
-	initFile(jstringToWstring(en, paþ));
+	initFile(jstriŋToWstriŋ(en, paþ));
 	MSG msg;
-	wc szWindowClass[] = L"titlesxa";
+	wč szWindowClass[] = L"titlesxa";
 
 	WNDCLASSEXW wcex = { sizeof(WNDCLASSEXW), CS_HREDRAW | CS_VREDRAW, wndProc, 0, 0, GetModuleHandle(nullptr), NULL,
 	NULL, (HBRUSH) (COLOR_WINDOW + 1), NULL, szWindowClass, NULL };
@@ -186,7 +190,7 @@ JNIEXPORT void JNICALL Java_org_nangliaa_qaamlia_Qaamlia_startHook (JNIEnv *en, 
 	ShowWindow(mainHwnd, SW_HIDE);
 	UpdateWindow(mainHwnd);
 
-	// Register for receiving Raw Input for keyboards
+	// Register for receiviŋ Raw Input for keyboards
 	RAWINPUTDEVICE rawInputDevice[2];
 	rawInputDevice[0].usUsagePage = 1;
 	rawInputDevice[0].usUsage = 0x06;

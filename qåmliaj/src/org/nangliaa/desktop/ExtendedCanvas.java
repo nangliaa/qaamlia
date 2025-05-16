@@ -3,14 +3,14 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
@@ -46,57 +46,49 @@ import org.nangliaa.extra.Point;
  * Base class of {@code CompLayout}
  */
 public class ExtendedCanvas extends Canvas implements MouseListener, KeyListener, MouseMotionListener, MouseWheelListener, ComponentListener {
-
 	private static final long serialVersionUID = 1L;
 
-	public static Img drawString (String s, int colour, float size) {
+	public static Img drawString (final String s, final int colour, final float size) {
 		return ImgAWT.drawString(s, colour, size);
 	}
 
-	public static void initFrame (JFrame j) {
+	public static void initFrame (final JFrame j) {
 		j.pack();
 		j.setVisible(false);
 		j.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
+
+	public int queuedRepaints = 0;
 
 	protected JFrame frame;
 
 	protected Graphix g2;
 	protected ImgAWT image2;
 	public double katt = 1.4;
-	public int width;
+	public int widþ;
 	public int height;
 	public Map<Class<? extends Nangliaa>, List<? extends Nangliaa>> objects;
 
 	@Override
-	public void componentHidden (ComponentEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+	public void componentHidden (final ComponentEvent e) {}
 
 	@Override
-	public void componentMoved (ComponentEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+	public void componentMoved (final ComponentEvent e) {}
 
 	@Override
-	public void componentResized (ComponentEvent e) {
+	public void componentResized (final ComponentEvent e) {
 		resize();
 	}
 
 	@Override
-	public void componentShown (ComponentEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+	public void componentShown (final ComponentEvent e) {}
 
 	public Img drawComps () {
 		return null;
 	}
 
 	protected void frameInit () {
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 		addKeyListener(this);
 		addMouseListener(this);
@@ -113,9 +105,9 @@ public class ExtendedCanvas extends Canvas implements MouseListener, KeyListener
 
 		objects = new HashMap<>();
 
-		int scrW = (int) screenSize.getWidth();
-		int scrH = (int) screenSize.getHeight();
-		width = scrW - frame.getInsets().left - frame.getInsets().right;
+		final int scrW = (int) screenSize.getWidth();
+		final int scrH = (int) screenSize.getHeight();
+		widþ = scrW - frame.getInsets().left - frame.getInsets().right;
 		height = scrH - frame.getInsets().top - frame.getInsets().bottom;
 		onScreenChanged();
 		requestFocus();
@@ -123,102 +115,103 @@ public class ExtendedCanvas extends Canvas implements MouseListener, KeyListener
 
 	public boolean isPhone () { return false; }
 
-	public void keyPressed (int vk, int mod) {}
+	public void keyPressed (final int vk, final int mod) {}
 
 	@Override
-	public void keyPressed (KeyEvent e) {
+	public void keyPressed (final KeyEvent e) {
 		keyPressed(e.getExtendedKeyCode(), e.getModifiersEx());
 		repaint();
 	}
 
-	public void keyReleased (int vk, int mod) {}
+	public void keyReleased (final int vk, final int mod) {}
 
 	@Override
-	public void keyReleased (KeyEvent e) {
+	public void keyReleased (final KeyEvent e) {
 		keyReleased(e.getExtendedKeyCode(), e.getModifiersEx());
 	}
 
-	public void keyTyped (char c, int mod) {}
+	public void keyTyped (final char c, final int mod) {}
 
 	@Override
-	public void keyTyped (KeyEvent e) {
+	public void keyTyped (final KeyEvent e) {
 		keyTyped(e.getKeyChar(), e.getModifiersEx());
 		repaint();
 	}
 
 	@Override
-	public void mouseClicked (MouseEvent e) {
-		mouseClicked(new Point(getMousePosition().x, getMousePosition().y), e.getModifiersEx());
+	public void mouseClicked (final MouseEvent e) {
+		mouseClicked(new Point(getMousePosition().x, getMousePosition().y), e.getModifiersEx() + (1 << (e.getButton() > 3 ? e.getButton() + 10 : e.getButton() + 9)), e.getClickCount());
 		repaint();
 	}
 
-	public void mouseClicked (Point point, int mod) {}
+	public void mouseClicked (final Point point, final int mod, final int clicks) {}
 
 	@Override
-	public void mouseDragged (MouseEvent e) {
+	public void mouseDragged (final MouseEvent e) {
 		mouseDragged(new Point(getMousePosition().x, getMousePosition().y), e.getModifiersEx());
 		repaint();
 	}
 
-	public void mouseDragged (Point point, int mod) {}
+	public void mouseDragged (final Point point, final int mod) {}
 
 	@Override
-	public void mouseEntered (MouseEvent e) {}
+	public void mouseEntered (final MouseEvent e) {}
 
 	@Override
-	public void mouseExited (MouseEvent e) {}
+	public void mouseExited (final MouseEvent e) {}
 
 	@Override
-	public void mouseMoved (MouseEvent e) {
-		java.awt.Point pos = getMousePosition();
+	public void mouseMoved (final MouseEvent e) {
+		final java.awt.Point pos = getMousePosition();
 		if (pos == null) return;
 		mouseMoved(new Point(pos.x, pos.y), e.getModifiersEx());
 		repaint();
 	}
 
-	public void mouseMoved (Point point, int mod) {}
+	public void mouseMoved (final Point point, final int mod) {}
 
 	@Override
-	public void mousePressed (MouseEvent e) {
+	public void mousePressed (final MouseEvent e) {
 		mousePressed(new Point(getMousePosition().x, getMousePosition().y), e.getModifiersEx());
 		repaint();
 	}
 
-	public void mousePressed (Point point, int mod) {}
+	public void mousePressed (final Point point, final int mod) {}
 
 	@Override
-	public void mouseReleased (MouseEvent e) {
+	public void mouseReleased (final MouseEvent e) {
 		mouseReleased(new Point(getMousePosition().x, getMousePosition().y), e.getModifiersEx());
 		repaint();
 	}
 
-	public void mouseReleased (Point point, int mod) {}
+	public void mouseReleased (final Point point, final int mod) {}
 
-	public void mouseWheelMoved (int rotations, Point point, int mod) {}
+	public void mouseWheelMoved (final int rotations, final Point point, final int mod) {}
 
 	@Override
-	public void mouseWheelMoved (MouseWheelEvent e) {
+	public void mouseWheelMoved (final MouseWheelEvent e) {
 		mouseWheelMoved(e.getWheelRotation(), new Point(getMousePosition().x, getMousePosition().y), e.getModifiersEx());
 		repaint();
 	}
 
 	public void onScreenChanged () {
-		image2 = new ImgAWT(width, height, BufferedImage.TYPE_INT_ARGB);
+		image2 = new ImgAWT(widþ, height, BufferedImage.TYPE_INT_ARGB);
 		g2 = new Graphix(image2.createGraphics());
 	}
 
 	@Override
-	public void paint (Graphics g) {
-		Img img = drawComps();
-		if (img != null) {
+	public void paint (final Graphics g) {
+		final Img img = drawComps();
+		if (g2 != null && img != null) {
 			g2.drawImage(img, 0, 0);
 			g.drawImage(image2, 0, 0, (int) (image2.getWidth() * katt), (int) (image2.getHeight() * katt), this);
 		}
+		queuedRepaints--;
 	}
 
 	@Override
 	public void repaint () {
-		// TODO Auto-generated method stub
+		queuedRepaints++;
 		super.repaint();
 	}
 
@@ -227,7 +220,7 @@ public class ExtendedCanvas extends Canvas implements MouseListener, KeyListener
 	}
 
 	@Override
-	public void update (Graphics g) {
+	public void update (final Graphics g) {
 		paint(g);
 	}
 }

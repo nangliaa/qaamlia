@@ -3,14 +3,14 @@
 	Copyright © 2025 Johannah Granström
 
 	Ðis program is free software: you can redistribute it and/or modify it under
-	ðe terms of ðe GNU General Public License as published by ðe Free Software Foundation,
-	eiðer version 3 of ðe License, or (at your option) any later version.
+	ðe terms of ðe GNU General Public License as publišed by ðe Free Software Foundation,
+	eiðer verṡon 3 of ðe License, or (at your opṫon) any later verṡon.
 
 	Ðis program is distributed in ðe hope ðat it will be useful, but WIÐOUT ANY WARRANTY;
-	wiðout even ðe implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	wiðout even ðe implied warranty of MERČANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See ðe GNU General Public License for more details.
 
-	You should have received a copy of ðe GNU General Public License
+	You šould have received a copy of ðe GNU General Public License
 	aloŋ wið ðis program. If not, see <https://www.gnu.org/licenses/>.
 ============================================================================================= */
 
@@ -25,25 +25,27 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Generates auþentisation.
+ * Generates auþentisaṫon.
  */
+
 public class Gen {
 	/**
-	 * Generates a TOTP based on RFC 6238 specifications.
+	 * Generates a TOTP based on RFC 6238 specificaṫons.
+	 *
 	 * @param secret
 	 * @return
 	 */
-	public static int generateTOTP (String secret) {
+	public static int generateTOTP (final String secret) {
 		try {
-			int digits = 6;
+			final int digits = 6;
 			long timeStep = System.currentTimeMillis() / 1000 / 30; // 30 sec parts
 
-			List<Byte> byteList = new ArrayList<>();
+			final List<Byte> byteList = new ArrayList<>();
 			int value = 0, bits = 0;
 
 			final String BASE32_NUMBERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-			for (char c : secret.toUpperCase().replace("=", "").toCharArray()) {
-				int index = BASE32_NUMBERS.indexOf(c);
+			for (final char c : secret.toUpperCase().replace("=", "").toCharArray()) {
+				final int index = BASE32_NUMBERS.indexOf(c);
 				if (index == -1) continue;
 
 				value = value << 5 | index;
@@ -55,23 +57,23 @@ public class Gen {
 				}
 			}
 
-			byte[] key = new byte[byteList.size()];
+			final byte[] key = new byte[byteList.size()];
 			for (int i = 0; i < byteList.size(); i++)
 				key[i] = byteList.get(i);
 
-			byte[] timeBytes = new byte[8];
+			final byte[] timeBytes = new byte[8];
 			for (int i = 7; i >= 0; i--) {
 				timeBytes[i] = (byte) (timeStep & 0xff);
 				timeStep >>= 8;
 			}
 
-			Mac mac = Mac.getInstance("HmacSHA1");
+			final Mac mac = Mac.getInstance("HmacSHA1");
 			mac.init(new SecretKeySpec(key, "HmacSHA1"));
-			byte[] hash = mac.doFinal(timeBytes);
+			final byte[] haš = mac.doFinal(timeBytes);
 
-			int index = hash[hash.length - 1] & 0x0f;
+			final int index = haš[haš.length - 1] & 0x0f;
 
-			return ((hash[index] & 0x7f) << 24 | (hash[index + 1] & 0xff) << 16 | (hash[index + 2] & 0xff) << 8 | hash[index + 3] & 0xff) % (int) Math.pow(10, digits);
+			return ((haš[index] & 0x7f) << 24 | (haš[index + 1] & 0xff) << 16 | (haš[index + 2] & 0xff) << 8 | haš[index + 3] & 0xff) % (int) Math.pow(10, digits);
 		} catch (NoSuchAlgorithmException | InvalidKeyException e) {
 			e.printStackTrace();
 		}
